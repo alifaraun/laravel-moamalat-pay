@@ -1,6 +1,11 @@
 @once
 
-    <script src="https://tnpg.moamalat.net:6006/js/lightbox.js"></script>
+    @if (config('moamalat-pay.production'))
+        <script src="https://npg.moamalat.net:6006/js/lightbox.js"></script>
+    @else
+        <script src="https://tnpg.moamalat.net:6006/js/lightbox.js"></script>
+    @endif
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>
 
