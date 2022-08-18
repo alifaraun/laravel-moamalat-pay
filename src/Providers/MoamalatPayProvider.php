@@ -1,11 +1,11 @@
 <?php
 
-namespace Moamalat\Pay\Providers;
+namespace MoamalatPay\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use Moamalat\Pay\Pay;
-use Moamalat\Pay\View\Components\Pay as PayComponent;
+use MoamalatPay\Pay;
+use MoamalatPay\View\Components\Pay as PayComponent;
 
 class MoamalatPayProvider extends ServiceProvider
 {

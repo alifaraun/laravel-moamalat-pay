@@ -1,6 +1,6 @@
 <?php
 
-namespace Moamalat\Pay\View\Components;
+namespace MoamalatPay\View\Components;
 
 use Illuminate\View\Component;
 

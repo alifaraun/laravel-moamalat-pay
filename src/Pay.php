@@ -1,8 +1,6 @@
 <?php
 
-namespace Moamalat\Pay;
-
-use Illuminate\Support\Facades\Http;
+namespace MoamalatPay;
 
 class Pay
 {

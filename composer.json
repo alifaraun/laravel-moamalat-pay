@@ -8,13 +8,13 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Alifaraun\\MoamalatPay\\": "src/"
+      "MoamalatPay\\": "src/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Moamalat\\Pay\\Providers\\MoamalatPayProvider"
+        "MoamalatPay\\Providers\\MoamalatPayProvider"
       ]
     }
   },
