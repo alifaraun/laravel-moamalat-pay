@@ -32,6 +32,8 @@ class MoamalatPayProvider extends ServiceProvider
             __DIR__ . '/../config/moamalat-pay.php' => config_path('moamalat-pay.php'),
         ], 'moamalat-pay');
 
+        $this->mergeConfigFrom(__DIR__ . '/../config/moamalat-pay.php', 'moamalat-pay');
+
 
         $this->app->singleton('moamalat-pay', function ($app) {
             return new Pay();
