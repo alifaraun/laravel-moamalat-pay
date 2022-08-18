@@ -36,7 +36,6 @@
             }
 
             set_datetimelocaltrxn() {
-                console.log("set_datetime");
                 this.dateTimeLocalTrxn = Number.parseInt(Date.now() / 1000).toString();
             }
 
@@ -64,7 +63,7 @@
                     this.merchantReference = merchantReference;
                 }
 
-                this.log("Starting pay");
+                this.log("Starting pay , produciton mode => {{ config('moamalat-pay.production') }}");
 
                 this.set_datetimelocaltrxn();
 
