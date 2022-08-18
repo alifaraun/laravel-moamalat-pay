@@ -63,7 +63,7 @@
                     this.merchantReference = merchantReference;
                 }
 
-                this.log("Starting pay , produciton mode => {{ config('moamalat-pay.production') }}");
+                this.log("Starting pay , mode => {{ config('moamalat-pay.production') ? 'produciton' : 'test' }}");
 
                 this.set_datetimelocaltrxn();
 
