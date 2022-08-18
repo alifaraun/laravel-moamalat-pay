@@ -1,28 +1,28 @@
 {
-    "name": "alifaraun/moamalat-pay",
-    "type": "library",
-    "description": "Easy - Moamalat Lightbox integration for Laravel.",
-    "require": {
-        "laravel/framework": "9.x-dev"
-    },
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Alifaraun\\MoamalatPay\\": "src/"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Moamalat\\Pay\\Providers\\MoamalatPayProvider"
-            ]
-        }
-    },
-    "authors": [
-        {
-            "name": "Ali Faraun",
-            "email": "ali1996426@hotmail.com"
-        }
-    ],
-    "minimum-stability": "dev"
+  "name": "alifaraun/laravel-moamalat-pay",
+  "type": "library",
+  "description": "Easy - Moamalat Lightbox integration for Laravel.",
+  "require": {
+    "laravel/framework": "9.x-dev"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Alifaraun\\MoamalatPay\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Moamalat\\Pay\\Providers\\MoamalatPayProvider"
+      ]
+    }
+  },
+  "authors": [
+    {
+      "name": "Ali Faraun",
+      "email": "ali1996426@hotmail.com"
+    }
+  ],
+  "minimum-stability": "dev"
 }
