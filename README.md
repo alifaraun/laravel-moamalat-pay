@@ -7,6 +7,26 @@ This package allows you to easily use Moamalat [ligthbox](http://docs.moamalat.n
 This is not official library from Moamalat , It is just an open source Library.
 ---
 
+
+## Table of contents 
+- [Installation](#installation)
+- [Configuration File](#configuration-file)
+- [Configuration for testing purpose](#configuration-for-testing-purpose)
+  * [Merchant](#merchant)
+  * [Card](#card)
+- [Usage](#usage)
+    + [Laravel componet](#laravel-componet)
+    + [Laravel methods](#laravel-methods)
+    + [Front end Javascript](#front-end-javascript)
+    + [Check processing status](#check-processing-status)
+    + [Get Transaction in back-end](#get-transaction-in-back-end)
+      - [Examples](#examples)
+  * [Security](#security)
+- [Credits](#credits)
+- [License](#license)
+
+
+
 ## Installation
 
 You can install the package via composer:
@@ -79,6 +99,23 @@ MOAMALATPAY_TID=
 MOAMALATPAY_KEY=
 MOAMALATPAY_PRODUCTION=
 ```
+
+## Configuration for testing purpose
+
+### Merchant 
+``` bash
+Merchant id	: 10081014649
+Terminal Id	: 99179395
+Secure key	: 39636630633731362D663963322D346362642D386531662D633963303432353936373431
+```
+
+### Card 
+``` bash
+Card : 6394993077260781
+EXP  : 10/23
+OTP	 : 111111
+```
+
 
 ## Usage
 
