@@ -112,10 +112,37 @@ Available events to check if operation success or fail
 ```js
 addEventListener("moamalatCompleted", function(e) {
     e.detail // response data
+    /* e.detail
+	{
+	    "TxnDate": "220822141359",
+	    "SystemReference": "1233114",
+	    "NetworkReference": "223414600869",
+	    "MerchantReference": "1641729671",
+	    "Amount": "10",
+	    "Currency": "434",
+	    "PaidThrough": "Card",
+	    "PayerAccount": "639499XXXXXX0781",
+	    "PayerName": "SS",
+	    "ProviderSchemeName": "",
+	    "SecureHash": "EB085D519BCC0887EA1031939F15DE230991E8C1E8731CD11A6916A5B7FC29D8",
+	    "DisplayData": "",
+	    "TokenCustomerId": "",
+	    "TokenCard": ""
+	}
+    */
 })
 
 addEventListener("moamalatError", function(e) {
     e.detail // response data
+    /* e.detail
+	{
+	    "error": "CUBEEX5212216:Authentication Failed",
+	    "Amount": "200.031",
+	    "MerchantReferenece": "",
+	    "DateTimeLocalTrxn": "220818232732",
+	    "SecureHash": "1C8B1301AD4C00BE66EC25FD45A81D0C4030C79EF53CA903FA5009ECCAD08D46"
+	}
+    */
 })
 ```
 
@@ -127,6 +154,7 @@ use MoamalatPay\Transaction;
 
 // get transaction from NPG(moamalat)
 $transaction = new Transaction($networkReference, $merchantReference);
+// Throws an exception if there is a problem in loading the transaction
 
 /** available methods to interact with transaction **/
 
@@ -168,6 +196,70 @@ $transaction->getResponse();
  */
 $transaction->checkApproved($amount = null, $card = null);
 
+```
+
+##### Examples
+
+```php
+use MoamalatPay\Transaction;
+
+// get transaction from NPG(moamalat)
+$transaction = new Transaction("223414600869","1641729671");
+
+
+$transaction->getAll();
+/* return 
+        [
+          "Amnt" => "10",
+          "AmountTrxn" => "10",
+          "AuthCode" => null,
+          "CardNo" => "639499XXXXXX0781",
+          "CardType" => "",
+          "Currency" => "LYD",
+          "ExternalTxnId" => null,
+          "FeeAmnt" => "0",
+          "HasToken" => true,
+          "ISForceSendCVCForRefund" => true,
+          "IsMustVoidTotalAmount" => true,
+          "IsPointTrasnaction" => false,
+          "IsRefund" => false,
+          "IsRefundEnabled" => true,
+          "IsSend" => false,
+          "MerchantReference" => "1641729671",
+          "MobileNumber" => null,
+          "OriginalTxnId" => "",
+          "RRN" => "223414600869",
+          "ReceiptNo" => "223414600869",
+          "RefundButton" => 1,
+          "RefundReason" => "",
+          "RefundSource" => "",
+          "RefundUserCreator" => "",
+          "RelatedTxnTotalAmount" => null,
+          "RemainingRefundAmount" => "10",
+          "ResCodeDesc" => "Approved",
+          "STAN" => "600869",
+          "SenderName" => "SS",
+          "Status" => "Approved",
+          "TipAmnt" => "0",
+          "TransType" => "Sale",
+          "TransactionChannel" => "Card",
+          "TransactionId" => "1233114",
+          "TxnDateTime" => "22/08/22  14:13",
+          "TxnIcon" => 2
+        ]
+*/
+
+$transaction->get('CardNo');
+// return 639499XXXXXX0781
+
+$transaction->getWithDefault('Card','card-not-found');
+// return card-not-found
+
+$transaction->checkApproved();
+// if transaction status is Approved it will return true 
+
+$transaction->checkApproved(10000,'639499XXXXXX0781');
+// if transaction is status is Approved , amount=10000 and CardNo=639499XXXXXX0781 it will return true
 ```
 
 
