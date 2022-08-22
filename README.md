@@ -26,8 +26,9 @@ php artisan vendor:publish --provider="moamalat-pay"
 The configuration file **moamalat-pay.php** is located in the **config** folder. Following are its contents when published:
 
 ```php
+
 return [
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Moamalat Payment Gateway Config
 	|--------------------------------------------------------------------------
@@ -36,38 +37,38 @@ return [
 	|
 	*/
 
-    // MID => merchant_id or outlet_number
-    'merchant_id' => env('MOAMALATPAY_MID'),
+	// MID => merchant_id or outlet_number
+	'merchant_id' => env('MOAMALATPAY_MID'),
 
-    // TID => terminal_id
-    'terminal_id' => env('MOAMALATPAY_TID'),
+	// TID => terminal_id
+	'terminal_id' => env('MOAMALATPAY_TID'),
 
-    // Secure key
-    'key' => env('MOAMALATPAY_KEY'),
+	// Secure key
+	'key' => env('MOAMALATPAY_KEY'),
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Production
 	|--------------------------------------------------------------------------
 	|
-	| If the production is set to "true", you will work on production 
-    | environment otherwise it will use testing environment
+	| If the production is set to "true", you will work on production environment
+	| otherwise it will use testing environment
 	|
 	*/
-    'production' => env('MOAMALATPAY_PRODUCTION', false),
+	'production' => env('MOAMALATPAY_PRODUCTION', false),
 
-    /*
+	/*
 	|--------------------------------------------------------------------------
 	| Show
 	|--------------------------------------------------------------------------
 	|
 	| If the show_logs is set to "true", you will see configurations
-    | and response of requests in browser console
+	| and response of requests in browser console
 	|
 	*/
-    'show_logs' => true,
-
+	'show_logs' => true,
 ];
+
 ```
 
 set your configurations in `.env` file:
