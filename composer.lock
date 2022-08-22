@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19e5ba5e1a36f65268c55be1b7eae6d9",
+    "content-hash": "fd849bea31febd9baabc9f3461e244c4",
     "packages": [
         {
             "name": "brick/math",
@@ -576,12 +576,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "708ed2b85e37c7f0381de1aef40dd5b3b899c128"
+                "reference": "afcebcadcae872af496a2579c13271629b549213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/708ed2b85e37c7f0381de1aef40dd5b3b899c128",
-                "reference": "708ed2b85e37c7f0381de1aef40dd5b3b899c128",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/afcebcadcae872af496a2579c13271629b549213",
+                "reference": "afcebcadcae872af496a2579c13271629b549213",
                 "shasum": ""
             },
             "require": {
@@ -749,7 +749,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-08-17T19:57:57+00:00"
+            "time": "2022-08-22T16:50:15+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1153,12 +1153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "132eace138aa8cddcc31a4b7331cbc7effde63ba"
+                "reference": "6a28e9d41a64a1a909d49f63f70af0115c239cfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/132eace138aa8cddcc31a4b7331cbc7effde63ba",
-                "reference": "132eace138aa8cddcc31a4b7331cbc7effde63ba",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/6a28e9d41a64a1a909d49f63f70af0115c239cfd",
+                "reference": "6a28e9d41a64a1a909d49f63f70af0115c239cfd",
                 "shasum": ""
             },
             "require": {
@@ -1173,7 +1173,7 @@
                 "doctrine/couchdb": "~1.0@dev",
                 "elasticsearch/elasticsearch": "^7 || ^8",
                 "ext-json": "*",
-                "graylog2/gelf-php": "^1.4.2",
+                "graylog2/gelf-php": "^1.4.2 || ^2@dev",
                 "guzzlehttp/guzzle": "^7.4",
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
@@ -1247,7 +1247,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-02T12:03:47+00:00"
+            "time": "2022-08-20T13:05:05+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2578,12 +2578,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "f002431051e05dcff4c97ba69885bec827456716"
+                "reference": "2351f1fddcf7226795234cdfe4f35b711450fcf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/f002431051e05dcff4c97ba69885bec827456716",
-                "reference": "f002431051e05dcff4c97ba69885bec827456716",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/2351f1fddcf7226795234cdfe4f35b711450fcf7",
+                "reference": "2351f1fddcf7226795234cdfe4f35b711450fcf7",
                 "shasum": ""
             },
             "require": {
@@ -2597,7 +2597,8 @@
                 "symfony/dependency-injection": "^5.4|^6.0",
                 "symfony/expression-language": "^5.4|^6.0",
                 "symfony/http-kernel": "^5.4.12|^6.0.12|^6.1.4",
-                "symfony/mime": "^5.4|^6.0"
+                "symfony/mime": "^5.4|^6.0",
+                "symfony/rate-limiter": "^5.2|^6.0"
             },
             "suggest": {
                 "symfony/mime": "To use the file extension guesser"
@@ -2644,7 +2645,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-17T15:30:03+00:00"
+            "time": "2022-08-19T14:27:33+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -2838,12 +2839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "8af13ae489694d7bc4cd1b78c0c4d9249867eae4"
+                "reference": "9b68e08190c4d36ba8ad99c717a55def95c601e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/8af13ae489694d7bc4cd1b78c0c4d9249867eae4",
-                "reference": "8af13ae489694d7bc4cd1b78c0c4d9249867eae4",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/9b68e08190c4d36ba8ad99c717a55def95c601e5",
+                "reference": "9b68e08190c4d36ba8ad99c717a55def95c601e5",
                 "shasum": ""
             },
             "require": {
@@ -2912,7 +2913,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-09T20:25:40+00:00"
+            "time": "2022-08-19T14:27:33+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
