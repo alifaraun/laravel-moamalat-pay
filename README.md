@@ -118,6 +118,59 @@ addEventListener("moamalatError", function(e) {
     e.detail // response data
 })
 ```
+
+
+#### Get Transaction in back-end
+
+```php
+use MoamalatPay\Transaction;
+
+// get transaction from NPG(moamalat)
+$transaction = new Transaction($networkReference, $merchantReference);
+
+/** available methods to interact with transaction **/
+
+/**
+ * Get all properties of transaction
+ * @return Array
+ */
+$transaction->getAll();
+
+/**
+ * Get property of transaction
+ * @param $property key
+ * @return mixed
+ */
+$transaction->get($property);
+
+
+/**
+ * Get property of reponse , if property not exists return default value
+ *
+ * @param $property
+ * @param $default
+ * @return mixed
+ */
+$transaction->getWithDefault($property, $default = null);
+
+/**
+ * Get all properties of reponse
+ * @return Array
+ */
+$transaction->getResponse();
+
+/**
+ * Check status of transaction is Approved
+ *
+ * @param $amount
+ * @param $card
+ * @return boolean
+ */
+$transaction->checkApproved($amount = null, $card = null);
+
+```
+
+
 <!-- 
 ### Changelog
 
