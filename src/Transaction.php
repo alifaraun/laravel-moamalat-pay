@@ -54,7 +54,8 @@ class Transaction
         ]);
 
         if ($response->getStatusCode() != 200 || $response["TotalCountAllTransaction"] != 1) {
-            throw new Exception($response->json('Message'));
+            $e = $response->json('Message'); // laravel 7.25 return array but 9 return string
+            throw new Exception(is_array($e) ? $e["Message"] : $e);
         }
 
         $this->response = $response->json();
