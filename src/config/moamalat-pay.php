@@ -19,6 +19,9 @@ return [
     // Secure key
     'key' => env('MOAMALATPAY_KEY'),
 
+    // notification Secure key
+    'notification_key' => env('MOAMALATPAY_NOTIFICATION_KEY'),
+
     /*
 	|--------------------------------------------------------------------------
 	| Production
@@ -40,5 +43,15 @@ return [
 	|
 	*/
     'show_logs' => false,
+
+    /*
+	|--------------------------------------------------------------------------
+	| Notification (Webhook) api route
+	|--------------------------------------------------------------------------
+	|
+	| api url route to receive notification
+	|
+	*/
+    'notification_url' => 'moamalat-pay/notify',
 
 ];
