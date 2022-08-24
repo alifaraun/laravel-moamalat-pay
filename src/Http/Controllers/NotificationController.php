@@ -41,11 +41,15 @@ class NotificationController extends Controller
         return response()->json(["Message" => 'Success', 'Success' => true]);
     }
 
+    /**
+     * Validate if secure has correct to make sure notification is comming from Moamalat
+     */
     private function validateSecureHas($secureHash, $Amount, $Currency, $DateTimeLocalTrxn, $MerchantId, $TerminalId)
     {
         try {
             $encode_data = "Amount=$Amount&Currency=$Currency&DateTimeLocalTrxn=$DateTimeLocalTrxn&MerchantId=$MerchantId&TerminalId=$TerminalId";
-            return hash_hmac('sha256', $encode_data, config('moamalat-pay.key')) == $secureHash;
+            $key = pack("H*", config('moamalat-pay.key'));
+            return strtoupper(hash_hmac('sha256', $encode_data, $key)) == strtoupper($secureHash);
         } catch (Exception $e) {
             return false;
         }
