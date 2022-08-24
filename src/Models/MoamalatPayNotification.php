@@ -26,6 +26,7 @@ class MoamalatPayNotification extends Model
         'ActionCode',
         'request',
         'verified',
+        'ip'
     ];
 
     protected $casts = [
