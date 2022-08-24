@@ -54,4 +54,14 @@ return [
 	*/
     'notification_url' => 'moamalat-pay/notify',
 
+    /*
+	|--------------------------------------------------------------------------
+	| Notification (Webhook) api database table name
+	|--------------------------------------------------------------------------
+	|
+	| table name to save notifications
+	|
+	*/
+    'notification_table' => 'moamalat_pay_notifications',
+
 ];

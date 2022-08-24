@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class MoamalatPayNotification extends Model
 {
 
-    public $table = 'moamalat_pay_notifications';
 
     public $fillable = [
         'MerchantId',
@@ -47,6 +46,16 @@ class MoamalatPayNotification extends Model
         'request' => 'string',
         'verified' => 'string',
     ];
+
+    /**
+     * Get the table associated with the model.
+     *
+     * @return string
+     */
+    public function getTable()
+    {
+        return config('moamalat-pay.notification_table', parent::getTable());
+    }
 
 
 
