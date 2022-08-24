@@ -33,6 +33,7 @@ class NotificationController extends Controller
         ]);
 
 
+        $data['ip'] = $request->ip();
         $data['request'] = json_encode($request->all());
         $data['verified'] = $this->validateSecureHas($request->input(['SecureHash']), $data['Amount'], $data['Currency'], $data['DateTimeLocalTrxn'], $data['MerchantId'], $data['TerminalId']);
         MoamalatPayNotification::create($data);
