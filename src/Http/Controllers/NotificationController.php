@@ -48,8 +48,8 @@ class NotificationController extends Controller
     {
         try {
             $encode_data = "Amount=$Amount&Currency=$Currency&DateTimeLocalTrxn=$DateTimeLocalTrxn&MerchantId=$MerchantId&TerminalId=$TerminalId";
-            $key = pack("H*", config('moamalat-pay.key'));
-            return strtoupper(hash_hmac('sha256', $encode_data, $key)) == strtoupper($secureHash);
+            $key = pack("H*", config('moamalat-pay.notification_key'));
+            return strtoupper(hash_hmac('sha256', $encode_data, $key)) === strtoupper($secureHash);
         } catch (Exception $e) {
             return false;
         }
