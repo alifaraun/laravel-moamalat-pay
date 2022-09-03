@@ -13,7 +13,7 @@ class CreateMoamalatPayNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('moamalat-pay.notification_table'), function (Blueprint $table) {
+        Schema::create(config('moamalat-pay.notification.table'), function (Blueprint $table) {
             $table->id();
             $table->string('MerchantId', 190)->nullable();
             $table->string('TerminalId', 190)->nullable();
@@ -45,6 +45,6 @@ class CreateMoamalatPayNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('moamalat-pay.notification_table'));
+        Schema::dropIfExists(config('moamalat-pay.notification.table'));
     }
 };

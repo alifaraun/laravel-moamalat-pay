@@ -18,5 +18,5 @@ Route::middleware('api')
     ->prefix('api')
     ->group(function () {
 
-        Route::post(config('moamalat-pay.notification_url'), [NotificationController::class, 'store']);
+        Route::post(config('moamalat-pay.notification.url'), [NotificationController::class, 'store'])->middleware('moamalat-allowed-ips');
     });

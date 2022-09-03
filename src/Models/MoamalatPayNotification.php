@@ -54,7 +54,7 @@ class MoamalatPayNotification extends Model
      */
     public function getTable()
     {
-        return config('moamalat-pay.notification_table', parent::getTable());
+        return config('moamalat-pay.notification.table', parent::getTable());
     }
 
 
