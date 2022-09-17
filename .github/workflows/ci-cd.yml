@@ -27,9 +27,12 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
+        
+      - name: Show php version
+        run: php -v
 
       - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist  --ignore-platform-reqs
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Static Analysis via PHPStan
         run: ./vendor/bin/phpstan analyse --memory-limit=2G
