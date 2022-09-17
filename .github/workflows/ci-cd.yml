@@ -15,15 +15,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ["7.3"]
+        php-versions: ["^7.2.5"]
 
     steps:
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, dom, fileinfo
-          #coverage: xdebug #optional
+          extensions: mbstring, dom, fileinfo, mysql
+          coverage: xdebug #optional
 
       - name: Checkout
         uses: actions/checkout@v3
