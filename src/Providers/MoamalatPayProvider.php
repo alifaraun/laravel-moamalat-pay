@@ -21,6 +21,7 @@ class MoamalatPayProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../views', 'moamalat-pay');
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
         Blade::component('moamalat-pay', PayComponent::class);
 
         $router = $this->app->make(Router::class);

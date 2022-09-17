@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class MoamalatPayNotification extends Model
 {
 
-
     public $fillable = [
         'MerchantId',
         'TerminalId',
