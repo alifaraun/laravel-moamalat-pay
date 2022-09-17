@@ -4,6 +4,31 @@ namespace MoamalatPay\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * Class MoamalatPayNotification
+ * @package MoamalatPay\Models
+ * @version Sep 17, 2022, 5:12 pm UTC
+ *
+ * @property integer $id
+ * @property string $MerchantId
+ * @property string $TerminalId
+ * @property string $DateTimeLocalTrxn
+ * @property string $TxnType
+ * @property string $Message
+ * @property string $PaidThrough
+ * @property string $SystemReference
+ * @property string $NetworkReference
+ * @property string $MerchantReference
+ * @property string $Amount
+ * @property string $Currency
+ * @property string $PayerAccount
+ * @property string $PayerName
+ * @property string $ActionCode
+ * @property string $request
+ * @property boolean $verified
+ * @property string $ip
+ */
 class MoamalatPayNotification extends Model
 {
 

@@ -53,9 +53,8 @@ class Transaction
             "SecureHash" => hash_hmac('sha256', $encode_data, $key),
         ]);
 
-        if ($response->getStatusCode() != 200 || $response["TotalCountAllTransaction"] != 1) {
-            $e = $response->json('Message'); // laravel 7.25 return array but 9 return string
-            throw new Exception(is_array($e) ? $e["Message"] : $e);
+        if ($response->status() != 200 || $response["TotalCountAllTransaction"] != 1) {
+            throw new Exception($response->offsetGet("Message"));
         }
 
         $this->response = $response->json();
@@ -98,7 +97,7 @@ class Transaction
 
     /**
      * Get all properties of reponse
-     * @return Array
+     * @return \Illuminate\Http\Client\Response
      */
     public function getResponse()
     {
@@ -116,7 +115,7 @@ class Transaction
     {
         $result = true;
         if ($amount != null) {
-            $result = $result && $this->data['AmountTrxn'] == $amount;
+            $result = /* $result && */ $this->data['AmountTrxn'] == $amount;
         }
         if ($card != null) {
             $result =  $result &&  $this->data['CardNo'] == $card;
