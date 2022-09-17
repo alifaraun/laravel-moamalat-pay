@@ -3,7 +3,7 @@
 namespace MoamalatPay\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller as BaseController;
 use Exception;
 use MoamalatPay\Events\UnverfiedTransaction;
 use MoamalatPay\Events\VerfiedTransaction;
@@ -18,7 +18,7 @@ use MoamalatPay\Models\MoamalatPayNotification;
  * Class NotificationController
  */
 
-class NotificationController extends Controller
+class NotificationController extends BaseController
 {
     public function store(Request $request)
     {
@@ -42,7 +42,15 @@ class NotificationController extends Controller
 
         $data['ip'] = $request->ip();
         $data['request'] = json_encode($request->all());
-        $data['verified'] = $this->validateSecureHas($request->input(['SecureHash']), $data['Amount'], $data['Currency'], $data['DateTimeLocalTrxn'], $data['MerchantId'], $data['TerminalId']);
+        $data['verified'] = $this->validateSecureHas(
+            $request->input('SecureHash'),
+            $request->input('Amount'),
+            $request->input('Currency'),
+            $request->input('DateTimeLocalTrxn'),
+            $request->input('MerchantId'),
+            $request->input('TerminalId')
+        );
+
         $notification  = MoamalatPayNotification::create($data);
 
         $this->dispatchEvents($notification);
