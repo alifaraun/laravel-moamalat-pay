@@ -11,6 +11,7 @@ use MoamalatPay\Events\ApprovedSaleTransaction;
 use MoamalatPay\Events\ApprovedTransaction;
 use MoamalatPay\Events\ApprovedVoidRefundTransaction;
 use MoamalatPay\Events\ApprovedVoidSaleTransaction;
+use MoamalatPay\Events\DisallowedRequestEvent;
 use MoamalatPay\Events\UnverfiedTransaction;
 use MoamalatPay\Events\VerfiedTransaction;
 use MoamalatPay\Tests\TestCase;
@@ -84,7 +85,8 @@ class NotificationsAPITest extends TestCase
                 ApprovedRefundTransaction::class,
                 ApprovedVoidSaleTransaction::class,
                 ApprovedVoidRefundTransaction::class,
-                UnverfiedTransaction::class
+                UnverfiedTransaction::class,
+                DisallowedRequestEvent::class
             ]
         );
     }
@@ -105,7 +107,8 @@ class NotificationsAPITest extends TestCase
                 ApprovedSaleTransaction::class,
                 ApprovedVoidSaleTransaction::class,
                 ApprovedVoidRefundTransaction::class,
-                UnverfiedTransaction::class
+                UnverfiedTransaction::class,
+                DisallowedRequestEvent::class
             ],
             [
                 'TxnType' => 2
@@ -129,7 +132,8 @@ class NotificationsAPITest extends TestCase
                 ApprovedSaleTransaction::class,
                 ApprovedRefundTransaction::class,
                 ApprovedVoidRefundTransaction::class,
-                UnverfiedTransaction::class
+                UnverfiedTransaction::class,
+                DisallowedRequestEvent::class
             ],
             [
                 'TxnType' => 3
@@ -153,7 +157,8 @@ class NotificationsAPITest extends TestCase
                 ApprovedSaleTransaction::class,
                 ApprovedRefundTransaction::class,
                 ApprovedVoidSaleTransaction::class,
-                UnverfiedTransaction::class
+                UnverfiedTransaction::class,
+                DisallowedRequestEvent::class
             ],
             [
                 'TxnType' => 4
@@ -196,8 +201,19 @@ class NotificationsAPITest extends TestCase
         // we set invalid ip as allowed ip, to check if api will catch our ip as disallowed ip
         Config::set('moamalat-pay.notification.allowed_ips', ['12.0.0.999']);
 
+        Event::fake();
+
         // call api notificaitons
         $this->postJson(route(config('moamalat-pay.notification.route_name')))
             ->assertStatus(403);
+
+        Event::assertDispatched(DisallowedRequestEvent::class, 1);
+        Event::assertNotDispatched(UnverfiedTransaction::class);
+        Event::assertNotDispatched(VerfiedTransaction::class);
+        Event::assertNotDispatched(ApprovedTransaction::class);
+        Event::assertNotDispatched(ApprovedSaleTransaction::class);
+        Event::assertNotDispatched(ApprovedRefundTransaction::class);
+        Event::assertNotDispatched(ApprovedVoidSaleTransaction::class);
+        Event::assertNotDispatched(ApprovedVoidRefundTransaction::class);
     }
 }
