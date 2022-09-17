@@ -66,6 +66,7 @@ return [
     'notification' => [
         'key' => env('MOAMALATPAY_NOTIFICATION_KEY'),
         'url' =>  'moamalat-pay/notify',
+        'route_name' =>  'moamalat_pay.notification',
         'table' => 'moamalat_pay_notifications',
         'allowed_ips' => ['*'],
 
