@@ -21,6 +21,9 @@ This is not official library from Moamalat , It is just an open source Library.
     + [Check processing status](#check-processing-status)
     + [Get Transaction in back-end](#get-transaction-in-back-end)
       - [Examples](#examples)
+    + [Notifications Service (Webhook)](#notifications-service-webhook)
+    + [Available Scopes](#available-scopes)
+    + [Events](#events)
   * [Security](#security)
 - [Credits](#credits)
 - [License](#license)
@@ -46,7 +49,6 @@ php artisan vendor:publish --provider="moamalat-pay"
 The configuration file **moamalat-pay.php** is located in the **config** folder. Following are its contents when published:
 
 ```php
-
 return [
 	/*
 	|--------------------------------------------------------------------------
@@ -86,9 +88,37 @@ return [
 	| and response of requests in browser console
 	|
 	*/
-	'show_logs' => true,
-];
+	'show_logs' => false,
 
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Notification (Webhook) api
+	|--------------------------------------------------------------------------
+	|
+	| This is service from moamalat on any transaction you will receive notification
+	| on api (webhook)
+	|
+	| key is your private notification key to use it in validate transaction requests
+	|
+	| url is route to receive notification
+	|
+	| table is name of table that will be used to save notifications
+	|
+	| allowed_ips are ips that will receive notification from them
+	| ['*'] means receive from any ip but it is not secure to receive notifcations from anyone
+	| you should ask moamalat on ips of their servers and use them
+	|
+	*/
+	'notification' => [
+		'key' => env('MOAMALATPAY_NOTIFICATION_KEY'),
+		'url' =>  'moamalat-pay/notify',
+		'route_name' =>  'moamalat_pay.notification',
+		'table' => 'moamalat_pay_notifications',
+		'allowed_ips' => ['*'],
+	]
+];
 ```
 
 set your configurations in `.env` file:
@@ -97,6 +127,7 @@ set your configurations in `.env` file:
 MOAMALATPAY_MID=
 MOAMALATPAY_TID=
 MOAMALATPAY_KEY=
+MOAMALATPAY_NOTIFICATION_KEY=
 MOAMALATPAY_PRODUCTION=
 ```
 
@@ -299,6 +330,97 @@ $transaction->checkApproved(10000,'639499XXXXXX0781');
 // if transaction is status is Approved , amount=10000 and CardNo=639499XXXXXX0781 it will return true
 ```
 
+### Notifications Service (Webhook)
+Notification Services allow merchants to receive notifications whenever a transaction is generated for their accounts
+
+We save all notifications in database with fire events depends on transaction type and status
+
+``` php
+/*
+MoamalatPay\Models\MoamalatPayNotification \\ Eloquent Model
+\\ properites
+id
+MerchantId
+TerminalId
+DateTimeLocalTrxn
+TxnType
+Message
+PaidThrough
+SystemReference
+NetworkReference
+MerchantReference
+Amount
+Currency
+PayerAccount
+PayerName
+ActionCode
+request
+ip
+verified
+created_at
+*/
+```
+#### Available Scopes
+
+``` php 
+// filter to get approved transactions (ActionCode = 00)
+MoamalatPay\Models\MoamalatPayNotification::approved() 
+
+// filter to get verified transactions (verified = 1)
+MoamalatPay\Models\MoamalatPayNotification::verified() 
+
+// filter to get transactions for currency terminal_id and merchant_id in config 
+MoamalatPay\Models\MoamalatPayNotification::currentCredential() 
+```
+
+#### Events
+ Example of how to add listener , check [laravel documentation](https://laravel.com/docs/events) for more info 
+
+``` php 
+// event will be fired when receive request from ip not exists in allowed_ips in config of moamalat-pay
+Event::listen(function (MoamalatPay\Events\DisallowedRequestEvent $event) {
+});
+
+// event will be fired after check secureHas is unverified
+Event::listen(function (MoamalatPay\Events\UnverfiedTransaction $event) {
+   $event->notification // Eloquent Model of transaction
+});
+
+// event will be fired after check secureHas is verified
+Event::listen(function (MoamalatPay\Events\VerfiedTransaction $event) {
+   $event->notification // Eloquent Model of transaction
+});
+
+// event will be fired after check secureHas is verified and transaction status is approved
+Event::listen(function (MoamalatPay\Events\ApprovedTransaction $event) {
+   $event->notification // Eloquent Model of transaction
+});
+
+// event will be fired after check secureHas is verified and transaction status is approved
+// and type of transaction is : 1: Sale
+Event::listen(function (MoamalatPay\Events\ApprovedSaleTransaction $event) {
+   $event->notification // Eloquent Model of transaction
+});
+
+// event will be fired after check secureHas is verified and transaction status is approved
+// and type of transaction is : 2: Refund
+Event::listen(function (MoamalatPay\Events\ApprovedRefundTransaction $event) {
+   $event->notification // Eloquent Model of transaction
+});
+
+// event will be fired after check secureHas is verified and transaction status is approved
+// and type of transaction is : 3: Void Sale
+Event::listen(function (MoamalatPay\Events\ApprovedVoidSaleTransaction $event) {
+   $event->notification // Eloquent Model of transaction
+});
+
+// event will be fired after check secureHas is verified and transaction status is approved
+// and type of transaction is : 4: Void Refund 
+Event::listen(function (MoamalatPay\Events\ApprovedVoidRefundTransaction $event) {
+   $event->notification // Eloquent Model of transaction
+});
+
+```
 
 <!-- 
 ### Changelog
