@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use MoamalatPay\Pay;
 use MoamalatPay\View\Components\Pay as PayComponent;
+use Illuminate\Routing\Router;
+use MoamalatPay\Http\Middleware\AllowedIps;
 
 class MoamalatPayProvider extends ServiceProvider
 {
@@ -17,7 +19,13 @@ class MoamalatPayProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/../views', 'moamalat-pay');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadFactoriesFrom(__DIR__ . '/../database/factories');
         Blade::component('moamalat-pay', PayComponent::class);
+
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('moamalat-allowed-ips', AllowedIps::class);
     }
 
 

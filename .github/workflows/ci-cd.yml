@@ -1,0 +1,41 @@
+# GitHub Action for Testing Laravel Package
+
+name: Laravel Package CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  laravel-ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ["7.4"]
+
+    steps:
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, dom, fileinfo
+          coverage: xdebug #optional
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Show php version
+        run: php -v
+
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Static Analysis via PHPStan
+        run: ./vendor/bin/phpstan analyse --memory-limit=2G
+
+      - name:  Test via PHPUnit
+        run: ./vendor/bin/phpunit

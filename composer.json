@@ -3,12 +3,17 @@
   "type": "library",
   "description": "Easy - Moamalat Lightbox integration for Laravel.",
   "require": {
-    "laravel/framework": "^7.25|^8.0|^9.0"
+    "laravel/framework": "^7.25"
   },
   "license": "MIT",
   "autoload": {
     "psr-4": {
       "MoamalatPay\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MoamalatPay\\Tests\\": "tests"
     }
   },
   "extra": {
@@ -24,5 +29,9 @@
       "email": "ali1996426@hotmail.com"
     }
   ],
-  "minimum-stability": "dev"
+  "minimum-stability": "dev",
+  "require-dev": {
+    "orchestra/testbench": "^5",
+    "nunomaduro/larastan": "1.0"
+  }
 }
