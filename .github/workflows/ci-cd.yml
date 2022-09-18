@@ -4,9 +4,9 @@ name: Laravel Package CI
 
 on:
   push:
-    branches: [feature/notification]
+    branches: [main]
   pull_request:
-    branches: [feature/notification]
+    branches: [main]
 
 jobs:
   laravel-ci:
