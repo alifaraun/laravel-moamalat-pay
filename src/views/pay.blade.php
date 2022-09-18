@@ -29,8 +29,8 @@
             }
 
             hex_to_str(hex) {
-                var str = "";
-                for (var i = 0; i < hex.length; i += 2)
+                let str = "";
+                for (let i = 0; i < hex.length; i += 2)
                     str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
                 return str;
             }
@@ -44,8 +44,8 @@
             }
 
             get_secure_hash() {
-                var data = this.encode_data();
-                var hash = CryptoJS.HmacSHA256(data, this.key).toString().toUpperCase();
+                let data = this.encode_data();
+                let hash = CryptoJS.HmacSHA256(data, this.key).toString().toUpperCase();
                 this.log({
                     data,
                     hash,
@@ -122,7 +122,7 @@
 
         {{-- /* if user set amount , then call pay */ --}}
         @if (isset($amount) && $amount)
-            _moamalatPay.pay({{ $amount }}, "{{ $reference }}")
+            _moamalatPay.pay({{ $amount }}, "{{ $reference }}");
         @endif
     </script>
 
