@@ -48,7 +48,7 @@ class MoamalatPayProvider extends ServiceProvider
             return new Pay();
         });
 
-        $this->app->singleton(Refund::class, function ($app) {
+        $this->app->singleton('moamalat-pay-refund', function ($app) {
             return new Refund();
         });
     }
