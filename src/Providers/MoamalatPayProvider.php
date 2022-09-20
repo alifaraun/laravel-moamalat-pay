@@ -8,6 +8,7 @@ use MoamalatPay\Pay;
 use MoamalatPay\View\Components\Pay as PayComponent;
 use Illuminate\Routing\Router;
 use MoamalatPay\Http\Middleware\AllowedIps;
+use MoamalatPay\Refund;
 
 class MoamalatPayProvider extends ServiceProvider
 {
@@ -45,6 +46,10 @@ class MoamalatPayProvider extends ServiceProvider
 
         $this->app->singleton('moamalat-pay', function ($app) {
             return new Pay();
+        });
+
+        $this->app->singleton(Refund::class, function ($app) {
+            return new Refund();
         });
     }
 }
