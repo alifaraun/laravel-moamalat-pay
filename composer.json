@@ -16,6 +16,10 @@
       "MoamalatPay\\Tests\\": "tests"
     }
   },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "analyse": "vendor/bin/phpstan analyse"
+  },
   "extra": {
     "laravel": {
       "providers": [

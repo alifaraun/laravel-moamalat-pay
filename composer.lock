@@ -5784,12 +5784,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "498b7069839e69995aac799f388ff7a823f868aa"
+                "reference": "049c94cf41e43bca2dc3b6ef5da8a57915015b31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/498b7069839e69995aac799f388ff7a823f868aa",
-                "reference": "498b7069839e69995aac799f388ff7a823f868aa",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/049c94cf41e43bca2dc3b6ef5da8a57915015b31",
+                "reference": "049c94cf41e43bca2dc3b6ef5da8a57915015b31",
                 "shasum": ""
             },
             "require": {
@@ -5836,7 +5836,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-15T16:28:54+00:00"
+            "time": "2022-09-21T03:25:12+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -6162,12 +6162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c65f6058074435d4cf0d36050d600103bb5af4bf"
+                "reference": "9be99737e3e8c97a9f2e9545f3dcb62cf54aa0f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c65f6058074435d4cf0d36050d600103bb5af4bf",
-                "reference": "c65f6058074435d4cf0d36050d600103bb5af4bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9be99737e3e8c97a9f2e9545f3dcb62cf54aa0f4",
+                "reference": "9be99737e3e8c97a9f2e9545f3dcb62cf54aa0f4",
                 "shasum": ""
             },
             "require": {
@@ -6256,7 +6256,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-19T05:27:37+00:00"
+            "time": "2022-09-19T15:48:08+00:00"
         },
         {
             "name": "psr/http-client",
