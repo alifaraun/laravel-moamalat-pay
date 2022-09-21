@@ -1,6 +1,6 @@
 # GitHub Action for Testing Laravel Package
 
-name: Laravel Package CI
+name: CI & Testing
 
 on:
   push:
