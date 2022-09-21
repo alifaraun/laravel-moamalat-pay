@@ -1,4 +1,11 @@
+
+
+
 # Laravel Moamalat Pay
+[![Build Status](https://github.com/alifaraun/laravel-moamalat-pay/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/alifaraun/laravel-moamalat-pay/actions)
+[![Latest Stable Version](https://poser.pugx.org/alifaraun/laravel-moamalat-pay/v/stable.svg)](https://packagist.org/packages/alifaraun/laravel-moamalat-pay)
+[![Total Downloads](https://poser.pugx.org/alifaraun/laravel-moamalat-pay/downloads.svg)](https://packagist.org/packages/alifaraun/laravel-moamalat-pay)
+[![License](https://poser.pugx.org/alifaraun/laravel-moamalat-pay/license)](https://packagist.org/packages/alifaraun/laravel-moamalat-pay)
 
 This package allows you to easily use Moamalat [ligthbox](http://docs.moamalat.net:55/lightbox.html) to add payment gateway in your laravel project.
 
