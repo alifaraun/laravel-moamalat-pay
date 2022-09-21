@@ -22,8 +22,10 @@ This is not official library from Moamalat , It is just an open source Library.
     + [Get Transaction in back-end](#get-transaction-in-back-end)
       - [Examples](#examples)
     + [Notifications Service (Webhook)](#notifications-service-webhook)
-    + [Available Scopes](#available-scopes)
-    + [Events](#events)
+      - [Available Scopes](#available-scopes)
+      - [Events](#events)
+    + [Refund and Void Transactions](#refund-and-void-transactions)
+      - [Examples](#examples-1)
   * [Security](#security)
 - [Credits](#credits)
 - [License](#license)
@@ -422,11 +424,129 @@ Event::listen(function (MoamalatPay\Events\ApprovedVoidRefundTransaction $event)
 
 ```
 
+
+
+#### Refund and Void Transactions
+When the refund is called before settlement (usually settlement at the end of the day), it will be void, otherwise it will be refunded
+
+```php
+
+/**
+ * Refund transaction by system reference of transaction
+ * @param string|integer $systemReference
+ * @param string|integer $amount 
+ * @return array content response of moamalat
+ */ 
+app('moamalat-pay-refund')->refundBySystemReference($systemReference, $amount)->getAll()
+// Throws an exception if there is a problem in refund the transaction
+
+
+/**
+ * Refund transaction by network reference of transaction
+ * @param string|integer $networkReference
+ * @param string|integer $amount
+ * @return array content response of moamalat
+ */
+app('moamalat-pay-refund')->refundByNetworkReference($networkReference, $amount)->getAll()
+// Throws an exception if there is a problem in refund the transaction
+
+/* response : return of getAll() method
+{
+    "Message": "Approved",
+    "Success": true,
+    "ActionCode": null,
+    "AuthCode": null,
+    "DecimalFraction": 3,
+    "ExternalTxnId": null,
+    "IsEnableRefund": false,
+    "MerchantReference": null,
+    "NetworkReference": null,
+    "ReceiptNumber": null,
+    "ReceiverAccountNumber": null,
+    "ReceiverName": null,
+    "ReceiverScheme": null,
+    "RefNumber": "1233678", // System reference for the new refund transaction
+    "SystemReference": 0,
+    "SystemTxnId": 0,
+    "TxnDate": null
+}
+*/
+```
+
+##### Examples
+
+```php
+$r = app('moamalat-pay-refund')->refundBySystemReference("1233114", "10");
+// or 
+$r = app('moamalat-pay-refund')->refundByNetworkReference("223414600869", "10");
+
+// will return instance of MoamalatPay\Refund class 
+ 
+/**
+ * Get all properties of reponse
+ * @return array
+ */
+$r->getAll(); 
+/* response 
+{
+    "Message": "Approved",
+    "Success": true,
+    "ActionCode": null,
+    "AuthCode": null,
+    "DecimalFraction": 3,
+    "ExternalTxnId": null,
+    "IsEnableRefund": false,
+    "MerchantReference": null,
+    "NetworkReference": null,
+    "ReceiptNumber": null,
+    "ReceiverAccountNumber": null,
+    "ReceiverName": null,
+    "ReceiverScheme": null,
+    "RefNumber": "1233678", // System reference for the new refund transaction
+    "SystemReference": 0,
+    "SystemTxnId": 0,
+    "TxnDate": null
+}
+*/
+
+/**
+ * Get property of transaction
+ * @param $property key
+ * @return mixed
+ */
+$r->get($property); 
+$r->get('Message');
+// return Approved
+
+
+/**
+ * Get property of reponse , if property not exists return default value
+ *
+ * @param $property
+ * @param $default
+ * @return mixed
+ */
+$r->getWithDefault($property, $default = null);  
+$r->getWithDefault('Card', 'No Card');
+// return No Card
+
+
+/**
+ * Get SystemReference of new refund transaction
+ * @return string|integer
+ */
+$r->getRefNumber(); 
+// return 1233678
+
+```
+
+
 <!-- 
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
  -->
+
 
 ### Security
 
