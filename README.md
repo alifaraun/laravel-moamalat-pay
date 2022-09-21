@@ -26,7 +26,8 @@ This is not official library from Moamalat , It is just an open source Library.
       - [Events](#events)
     + [Refund and Void Transactions](#refund-and-void-transactions)
       - [Examples](#examples-1)
-  * [Security](#security)
+- [Testing](#testing)
+- [Security](#security)
 - [Credits](#credits)
 - [License](#license)
 
@@ -540,6 +541,22 @@ $r->getRefNumber();
 
 ```
 
+## Testing 
+Run the tests with:
+```
+composer test
+// or
+./vendor/bin/phpunit
+```
+
+Run Static Analysis Tool (PHPStan)
+```
+composer analyse
+// or
+./vendor/bin/phpstan analyse
+```
+
+
 
 <!-- 
 ### Changelog
@@ -548,7 +565,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
  -->
 
 
-### Security
+## Security
 
 If you discover any security related issues, please email ali1996426@hotmail.com instead of using the issue tracker.
 
