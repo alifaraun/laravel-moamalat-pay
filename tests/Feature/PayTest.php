@@ -2,13 +2,14 @@
 
 namespace MoamalatPay\Tests\Feature;
 
-use Illuminate\Support\Facades\Blade;
 use MoamalatPay\Pay;
 use MoamalatPay\Tests\TestCase;
-use MoamalatPay\View\Components\Pay as ComponentsPay;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
 class PayTest extends TestCase
 {
+
+    use InteractsWithViews;
 
 
     /**
@@ -36,10 +37,9 @@ class PayTest extends TestCase
      */
     public function test_component()
     {
-        $blade = (new ComponentsPay())->render()->render();
-        $this->assertStringContainsString('class MoamalataPay', $blade);
-        $this->assertStringContainsString('let _moamalatPay = new MoamalataPay(', $blade);
-        $this->assertStringNotContainsString('_moamalatPay.pay(', $blade);
-        $this->assertStringNotContainsString("_moamalatPay.pay(1000, '');", $blade);
+        $view = $this->blade('<x-moamalat-pay amount="1000" />');
+        $view->assertSeeText('class MoamalataPay');
+        $view->assertSeeText('let _moamalatPay = new MoamalataPay(');
+        $view->assertSeeText('_moamalatPay.pay(1000, "");', false);
     }
 }
