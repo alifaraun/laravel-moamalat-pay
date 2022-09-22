@@ -1,36 +1,40 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace MoamalatPay\Factories;
 
-use Faker\Generator as Faker;
-use MoamalatPay\Models\MoamalatPayNotification;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
+class MoamalatPayNotificationFactory extends Factory
+{
 
-$factory->define(
-    MoamalatPayNotification::class,
-    function (Faker $faker) {
-
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
         $data = [
             'MerchantId' => config('moamalat-pay.merchant_id'),
             'TerminalId' => config('moamalat-pay.terminal_id'),
             'DateTimeLocalTrxn' => now(),
-            'TxnType' => $faker->numberBetween(1, 4),
-            'Message' => $faker->word(),
-            'PaidThrough' => $faker->randomElement(['Card', 'Tahweel']),
-            'SystemReference' => $faker->uuid(),
-            'NetworkReference' => $faker->uuid(),
-            'MerchantReference' => $faker->uuid(),
-            'Amount' => $faker->randomNumber(),
+            'TxnType' => $this->faker->numberBetween(1, 4),
+            'Message' => $this->faker->word(),
+            'PaidThrough' => $this->faker->randomElement(['Card', 'Tahweel']),
+            'SystemReference' => $this->faker->uuid(),
+            'NetworkReference' => $this->faker->uuid(),
+            'MerchantReference' => $this->faker->uuid(),
+            'Amount' => $this->faker->randomNumber(),
             'Currency' => 434,
-            'PayerAccount' => $faker->creditCardNumber(),
-            'PayerName' => $faker->word(),
-            'ActionCode' => $faker->randomNumber(2),
+            'PayerAccount' => $this->faker->creditCardNumber(),
+            'PayerName' => $this->faker->word(),
+            'ActionCode' => $this->faker->randomNumber(2),
         ];
 
         return $data + [
             'request' => json_encode($data),
-            'verified' => $faker->boolean(),
-            'ip' => $faker->ipv4()
+            'verified' => $this->faker->boolean(),
+            'ip' => $this->faker->ipv4()
         ];
     }
-);
+}

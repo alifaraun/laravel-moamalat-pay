@@ -3,7 +3,7 @@
   "type": "library",
   "description": "Easy - Moamalat Lightbox integration for Laravel.",
   "require": {
-    "laravel/framework": "^7.25"
+    "laravel/framework": "^8.0"
   },
   "license": "MIT",
   "autoload": {
@@ -17,8 +17,8 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/phpunit",
-    "analyse": "vendor/bin/phpstan analyse"
+    "test": "vendor/bin/testbench package:test",
+    "analyse": "vendor/bin/phpstan analyse --memory-limit=2G"
   },
   "extra": {
     "laravel": {
@@ -35,8 +35,10 @@
   ],
   "minimum-stability": "dev",
   "require-dev": {
-    "orchestra/testbench": "^5",
+    "orchestra/testbench": "^6",
     "nunomaduro/larastan": "1.0",
-    "guzzlehttp/guzzle": "7.5.x-dev"
+    "guzzlehttp/guzzle": "7.5.x-dev",
+    "laravel/legacy-factories": "1.x-dev",
+    "nunomaduro/collision": "^5.10"
   }
 }
