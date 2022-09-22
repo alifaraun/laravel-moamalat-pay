@@ -48,6 +48,13 @@ You can install the package via composer:
 composer require alifaraun/laravel-moamalat-pay
 ```
 
+**Laravel Version Compatibility**
+
+| Laravel | Package  | install command  |
+|:--------|:---------|:-----------------|
+| 8.x.x   | 2.x      | `composer require alifaraun/laravel-moamalat-pay "^2.0"` |
+| 7.25.x  | 1.x      | `composer require alifaraun/laravel-moamalat-pay "^1.0"` |
+
 If you want to customize configurations:
 
 ```bash
