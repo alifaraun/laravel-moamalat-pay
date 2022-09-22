@@ -54,7 +54,7 @@ composer require alifaraun/laravel-moamalat-pay
 |:--------|:---------|:-----------------|
 | 9.x.x   | 3.x      | `composer require alifaraun/laravel-moamalat-pay "^3.0"` |
 | 8.x.x   | 2.x      | `composer require alifaraun/laravel-moamalat-pay "^2.0"` |
-| 7.25.x  | 1.x      | `composer require alifaraun/laravel-moamalat-pay "^1.0"` |
+| ^7.25.x  | 1.x      | `composer require alifaraun/laravel-moamalat-pay "^1.0"` |
 
 If you want to customize configurations:
 
