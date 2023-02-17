@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ["8.1"]
+        php-versions: ["8.1", "8.2"]
 
     steps:
       - name: Setup PHP, with composer and extensions
@@ -37,5 +37,5 @@ jobs:
       - name: Static Analysis via PHPStan
         run: composer analyse
 
-      - name:  Test via PHPUnit
+      - name: Test via PHPUnit
         run: composer test
