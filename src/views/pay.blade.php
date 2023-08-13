@@ -11,16 +11,13 @@
 
     <script>
         class MoamalataPay {
-            constructor(MID, TID, key, amount, merchantReference = "", debug = false) {
+            constructor(MID, TID, amount, merchantReference = "", debug = false) {
                 this.MID = MID;
                 this.TID = TID;
-                this.key = this.hex_to_str(key);
                 this.amount = amount;
                 this.merchantReference = merchantReference;
                 this.debug = debug;
-                this.dateTimeLocalTrxn = null;
             }
-
 
             log(data) {
                 if (this.debug) {
@@ -28,33 +25,25 @@
                 }
             }
 
-            hex_to_str(hex) {
-                let str = "";
-                for (let i = 0; i < hex.length; i += 2)
-                    str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-                return str;
+            async fetchSecureHash() {
+                const url = new URL("{{ route(config('moamalat-pay.generate-securekey.route_name')) }}");
+                url.searchParams.set('MID', this.MID);
+                url.searchParams.set('TID', this.TID);
+                url.searchParams.set('amount', this.amount);
+                url.searchParams.set('merchantReference', this.merchantReference);
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch secureHash from server. Status: ${response.status}`);
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error("An error occurred:", error);
+                    throw error;
+                }
             }
 
-            set_datetimelocaltrxn() {
-                this.dateTimeLocalTrxn = Number.parseInt(Date.now() / 1000).toString();
-            }
-
-            encode_data() {
-                return `Amount=${this.amount}&DateTimeLocalTrxn=${this.dateTimeLocalTrxn}&MerchantId=${this.MID}&MerchantReference=${this.merchantReference}&TerminalId=${this.TID}`;
-            }
-
-            get_secure_hash() {
-                let data = this.encode_data();
-                let hash = CryptoJS.HmacSHA256(data, this.key).toString().toUpperCase();
-                this.log({
-                    data,
-                    hash,
-                    key: this.key
-                });
-                return hash;
-            }
-
-            pay(amount = null, merchantReference = null) {
+            async pay(amount = null, merchantReference = null) {
 
                 if (amount !== null) {
                     this.amount = amount;
@@ -65,17 +54,17 @@
 
                 this.log("Starting pay , mode => {{ config('moamalat-pay.production') ? 'produciton' : 'test' }}");
 
-                this.set_datetimelocaltrxn();
-
                 let parent_ = this;
+
+                const secureHashResponse = await this.fetchSecureHash();
 
                 Lightbox.Checkout.configure = {
                     MID: this.MID,
                     TID: this.TID,
                     AmountTrxn: this.amount,
                     MerchantReference: this.merchantReference,
-                    TrxDateTime: this.dateTimeLocalTrxn,
-                    SecureHash: this.get_secure_hash(),
+                    TrxDateTime: secureHashResponse.DateTimeLocalTrxn,
+                    SecureHash: secureHashResponse.secureHash,
                     completeCallback: function(data) {
                         window.dispatchEvent(
                             new CustomEvent('moamalatCompleted', {
@@ -111,10 +100,9 @@
         }
 
 
-        let _moamalatPay = new MoamalataPay(
+        const _moamalatPay = new MoamalataPay(
             "{{ config('moamalat-pay.merchant_id') }}",
             "{{ config('moamalat-pay.terminal_id') }}",
-            "{{ config('moamalat-pay.key') }}",
             0,
             "",
             "{{ config('moamalat-pay.show_logs') }}",

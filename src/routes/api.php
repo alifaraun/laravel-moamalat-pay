@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use MoamalatPay\Http\Controllers\ConfigController;
 use MoamalatPay\Http\Controllers\NotificationController;
 
 /*
@@ -21,4 +22,7 @@ Route::middleware('api')
         Route::post(config('moamalat-pay.notification.url'), [NotificationController::class, 'store'])
             ->middleware('moamalat-allowed-ips')
             ->name(config('moamalat-pay.notification.route_name'));
+
+        Route::get(config('moamalat-pay.generate-securekey.url'), [ConfigController::class, 'generateSecureKey'])
+            ->name(config('moamalat-pay.generate-securekey.route_name'));
     });

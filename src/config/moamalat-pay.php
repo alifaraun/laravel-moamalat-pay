@@ -43,6 +43,26 @@ return [
     'show_logs' => false,
 
 
+    /*
+	|--------------------------------------------------------------------------
+	| Generate Secure Hash api
+	|--------------------------------------------------------------------------
+	|
+	| This is service (api) to generate secureHash to be used in pay in Lightbox.
+	|
+	| url is route of api of generate secureHash
+    |
+	| route_name is name of route of api of generate secureHash
+	|
+	*/
+    'generate-securekey' => [
+        'url' =>  'moamalat-pay/securekey',
+        'route_name' =>  'moamalat_pay.generate_securekey',
+    ],
+
+
+    // URL of api endpoint for generating secure key to use in pay
+    'generate-securekey-url' => 'moamalat-pay/securekey',
 
     /*
 	|--------------------------------------------------------------------------
