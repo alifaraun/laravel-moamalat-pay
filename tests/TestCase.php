@@ -29,6 +29,10 @@ class TestCase extends \Orchestra\Testbench\TestCase
             "key" =>  "39353638663431622D303136622D343235322D623330632D383361633838383965373965",
             "production" =>  false,
             "show_logs" =>  true,
+            'generate-securekey' => [
+                'url' =>  'moamalat-pay/securekey',
+                'route_name' =>  'moamalat_pay.generate_securekey',
+            ],
             "notification" =>  [
                 "key" =>  "39353638663431622D303136622D343235322D623330632D383361633838383965373965",
                 "url" =>  "moamalat-pay/notify",

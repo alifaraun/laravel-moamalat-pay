@@ -27,9 +27,10 @@ class PayTest extends TestCase
     {
         $blade = app('moamalat-pay')->init();
         $this->assertStringContainsString('class MoamalataPay', $blade);
-        $this->assertStringContainsString('let _moamalatPay = new MoamalataPay(', $blade);
+        $this->assertStringContainsString('const _moamalatPay = new MoamalataPay(', $blade);
         $this->assertStringNotContainsString('_moamalatPay.pay(', $blade);
         $this->assertStringContainsString("_moamalatPay.pay(1000, '');", app('moamalat-pay')->pay(1000));
+        $this->assertStringContainsString("_moamalatPay.pay(1000, 'test-ref');", app('moamalat-pay')->pay(1000, 'test-ref'));
     }
 
     /**
@@ -39,7 +40,7 @@ class PayTest extends TestCase
     {
         $view = $this->blade('<x-moamalat-pay amount="1000" />');
         $view->assertSeeText('class MoamalataPay');
-        $view->assertSeeText('let _moamalatPay = new MoamalataPay(');
+        $view->assertSeeText('const _moamalatPay = new MoamalataPay(');
         $view->assertSeeText('_moamalatPay.pay(1000, "");', false);
     }
 }

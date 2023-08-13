@@ -61,9 +61,6 @@ return [
     ],
 
 
-    // URL of api endpoint for generating secure key to use in pay
-    'generate-securekey-url' => 'moamalat-pay/securekey',
-
     /*
 	|--------------------------------------------------------------------------
 	| Notification (Webhook) api

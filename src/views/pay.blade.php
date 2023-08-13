@@ -110,7 +110,7 @@
 
         {{-- /* if user set amount , then call pay */ --}}
         @if (isset($amount) && $amount)
-            _moamalatPay.pay({{ $amount }}, "{{ $reference }}");
+            _moamalatPay.pay({{ $amount }}, "{{ $reference ?? '' }}");
         @endif
     </script>
 
