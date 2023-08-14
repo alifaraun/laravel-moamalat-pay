@@ -49,9 +49,12 @@ class NotificationsAPITest extends TestCase
 
         // load request from json to array
         $data = json_decode(file_get_contents(__DIR__ . './../_fixtures/transactions/verfied.json'), true);
+        $body = array_merge($data, $extraData);
 
         // call api notificaitons
-        $this->postJson(route(config('moamalat-pay.notification.route_name')), array_merge($data, $extraData))
+        //$this->postJson(route(config('moamalat-pay.notification.route_name')), $body)
+        //There is issuse with $this->postJson it sends body empty , that is why I use $this->withHeaders
+        $this->withHeaders([])->post(route(config('moamalat-pay.notification.route_name')), $body)
             ->assertStatus(200)
             ->assertJson(["Message" => 'Success', 'Success' => true]);
 
