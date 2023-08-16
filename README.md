@@ -68,6 +68,7 @@ php artisan vendor:publish --provider="moamalat-pay"
 The configuration file **moamalat-pay.php** is located in the **config** folder. Following are its contents when published:
 
 ```php
+
 return [
 	/*
 	|--------------------------------------------------------------------------
@@ -77,16 +78,17 @@ return [
 	| These options to set your configurations of muamalat
 	|
 	*/
-
+	
 	// MID => merchant_id or outlet_number
 	'merchant_id' => env('MOAMALATPAY_MID'),
-
+	
 	// TID => terminal_id
 	'terminal_id' => env('MOAMALATPAY_TID'),
-
+	
 	// Secure key
 	'key' => env('MOAMALATPAY_KEY'),
-
+	
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Production
@@ -97,7 +99,7 @@ return [
 	|
 	*/
 	'production' => env('MOAMALATPAY_PRODUCTION', false),
-
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Show
@@ -108,9 +110,26 @@ return [
 	|
 	*/
 	'show_logs' => false,
-
-
-
+	
+	
+	/*
+	|--------------------------------------------------------------------------
+	| Generate Secure Hash api
+	|--------------------------------------------------------------------------
+	|
+	| This is service (api) to generate secureHash to be used in pay in Lightbox.
+	|
+	| url is route of api of generate secureHash
+	|
+	| route_name is name of route of api of generate secureHash
+	|
+	*/
+	'generate-securekey' => [
+	'url' =>  'moamalat-pay/securekey',
+	'route_name' =>  'moamalat_pay.generate_securekey',
+	],
+	
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Notification (Webhook) api
@@ -131,13 +150,13 @@ return [
 	|
 	*/
 	'notification' => [
-		'key' => env('MOAMALATPAY_NOTIFICATION_KEY'),
-		'url' =>  'moamalat-pay/notify',
-		'route_name' =>  'moamalat_pay.notification',
-		'table' => 'moamalat_pay_notifications',
-		'allowed_ips' => ['*'],
-	]
-];
+	'key' => env('MOAMALATPAY_NOTIFICATION_KEY'),
+	'url' =>  'moamalat-pay/notify',
+	'route_name' =>  'moamalat_pay.notification',
+	'table' => 'moamalat_pay_notifications',
+	'allowed_ips' => ['*'],
+    	]
+]; 
 ```
 
 set your configurations in `.env` file:
