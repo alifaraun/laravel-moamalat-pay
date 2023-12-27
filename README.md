@@ -250,6 +250,10 @@ addEventListener("moamalatError", function(e) {
 	}
     */
 })
+
+addEventListener("moamalatCancel", function() {
+
+})
 ```
 
 
