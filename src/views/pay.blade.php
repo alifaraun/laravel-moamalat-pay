@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac-sha256.min.js"></script>
 
     <script>
-        if (!window.dispatchEvent) {
+        if (window.dispatchEvent) {
 
             class MoamalataPay {
                 constructor(MID, TID, amount, merchantReference = "", debug = false) {
