@@ -15,8 +15,8 @@ class GenerateSecureKeyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "MID" => "required",
-            "TID" => "required",
+            'MID' => 'required',
+            'TID' => 'required',
             'amount' => 'required|integer|min:1',
             'merchantReference' => 'nullable',
         ];
@@ -30,14 +30,14 @@ class GenerateSecureKeyRequest extends FormRequest
         return [
             function (Validator $validator) {
 
-                if (!$validator->errors()->has('MID') && $this->MID != config('moamalat-pay.merchant_id')) {
+                if (! $validator->errors()->has('MID') && $this->MID != config('moamalat-pay.merchant_id')) {
                     $validator->errors()->add('MID', 'The MID is incorrect');
                 }
 
-                if (!$validator->errors()->has('TID') && $this->TID != config('moamalat-pay.terminal_id')) {
+                if (! $validator->errors()->has('TID') && $this->TID != config('moamalat-pay.terminal_id')) {
                     $validator->errors()->add('TID', 'The TID is incorrect');
                 }
-            }
+            },
         ];
     }
 

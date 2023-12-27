@@ -2,12 +2,10 @@
 
 namespace MoamalatPay\Tests\Feature;
 
-
 use MoamalatPay\Tests\TestCase;
 
 class ConfigAPITest extends TestCase
 {
-
     /**
      * Test that the Moamalat Pay config values are loaded.
      *
@@ -47,21 +45,20 @@ class ConfigAPITest extends TestCase
         $this->getJson(route(config('moamalat-pay.generate-securekey.route_name')))
             ->assertUnprocessable()
             ->assertJson([
-                "message" => "The MID field is required. (and 2 more errors)",
-                "errors" => [
-                    "MID" => [
-                        "The MID field is required."
+                'message' => 'The MID field is required. (and 2 more errors)',
+                'errors' => [
+                    'MID' => [
+                        'The MID field is required.',
                     ],
-                    "TID" => [
-                        "The TID field is required."
+                    'TID' => [
+                        'The TID field is required.',
                     ],
-                    "amount" => [
-                        "The amount field is required."
-                    ]
-                ]
+                    'amount' => [
+                        'The amount field is required.',
+                    ],
+                ],
             ], true);
     }
-
 
     /**
      * Test generating a secure key with incorrect merchant/terminal IDs.
@@ -79,15 +76,15 @@ class ConfigAPITest extends TestCase
         $this->getJson(route(config('moamalat-pay.generate-securekey.route_name'), $params))
             ->assertUnprocessable()
             ->assertJson([
-                "message" => "The MID is incorrect (and 1 more error)",
-                "errors" => [
-                    "MID" => [
-                        "The MID is incorrect"
+                'message' => 'The MID is incorrect (and 1 more error)',
+                'errors' => [
+                    'MID' => [
+                        'The MID is incorrect',
                     ],
-                    "TID" => [
-                        "The TID is incorrect"
+                    'TID' => [
+                        'The TID is incorrect',
                     ],
-                ]
+                ],
             ], true);
     }
 }

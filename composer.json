@@ -39,6 +39,7 @@
     "nunomaduro/larastan": "^2.4",
     "guzzlehttp/guzzle": "7.5.x-dev",
     "nunomaduro/collision": "^7.0",
-    "laravel/legacy-factories": "1.x-dev"
+    "laravel/legacy-factories": "1.x-dev",
+    "laravel/pint": "dev-main"
   }
 }

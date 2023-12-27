@@ -2,22 +2,21 @@
 
 namespace MoamalatPay\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Exception;
+use MoamalatPay\Events\ApprovedRefundTransaction;
+use MoamalatPay\Events\ApprovedSaleTransaction;
+use MoamalatPay\Events\ApprovedTransaction;
+use MoamalatPay\Events\ApprovedVoidRefundTransaction;
+use MoamalatPay\Events\ApprovedVoidSaleTransaction;
 use MoamalatPay\Events\UnverfiedTransaction;
 use MoamalatPay\Events\VerfiedTransaction;
-use MoamalatPay\Events\ApprovedTransaction;
-use MoamalatPay\Events\ApprovedSaleTransaction;
-use MoamalatPay\Events\ApprovedRefundTransaction;
-use MoamalatPay\Events\ApprovedVoidSaleTransaction;
-use MoamalatPay\Events\ApprovedVoidRefundTransaction;
 use MoamalatPay\Models\MoamalatPayNotification;
 
 /**
  * Class NotificationController
  */
-
 class NotificationController extends BaseController
 {
     public function store(Request $request)
@@ -39,7 +38,6 @@ class NotificationController extends BaseController
             'ActionCode' => 'nullable',
         ]);
 
-
         $data['ip'] = $request->ip();
         $data['request'] = json_encode($request->all());
         $data['verified'] = $this->validateSecureHas(
@@ -51,18 +49,18 @@ class NotificationController extends BaseController
             $request->input('TerminalId')
         );
 
-        $notification  = MoamalatPayNotification::create($data);
+        $notification = MoamalatPayNotification::create($data);
 
         $this->dispatchEvents($notification);
 
-        return response()->json(["Message" => 'Success', 'Success' => true]);
+        return response()->json(['Message' => 'Success', 'Success' => true]);
     }
 
     protected function dispatchEvents(MoamalatPayNotification $notification)
     {
         if ($notification->verified) {
             VerfiedTransaction::dispatch($notification);
-            if (/* $notification->Message == 'Approved' && */$notification->ActionCode === '00') { // aproved
+            if (/* $notification->Message == 'Approved' && */ $notification->ActionCode === '00') { // aproved
                 ApprovedTransaction::dispatch($notification);
                 switch ($notification->TxnType) {
                     case '1':
@@ -91,7 +89,8 @@ class NotificationController extends BaseController
     {
         try {
             $encode_data = "Amount=$Amount&Currency=$Currency&DateTimeLocalTrxn=$DateTimeLocalTrxn&MerchantId=$MerchantId&TerminalId=$TerminalId";
-            $key = pack("H*", config('moamalat-pay.notification.key'));
+            $key = pack('H*', config('moamalat-pay.notification.key'));
+
             return strtoupper(hash_hmac('sha256', $encode_data, $key)) === strtoupper($secureHash);
         } catch (Exception $e) {
             return false;

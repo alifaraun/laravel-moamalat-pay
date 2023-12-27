@@ -16,7 +16,7 @@ class AllowedIps
     public function handle($request, Closure $next)
     {
         $allowed = config('moamalat-pay.notification.allowed_ips');
-        if (!in_array('*', $allowed) && !in_array($request->ip(), $allowed)) {
+        if (! in_array('*', $allowed) && ! in_array($request->ip(), $allowed)) {
             DisallowedRequestEvent::dispatch();
             abort(403);
         }

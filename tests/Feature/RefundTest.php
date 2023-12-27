@@ -9,7 +9,6 @@ use MoamalatPay\Tests\TestCase;
 
 class RefundTest extends TestCase
 {
-
     protected $transaction;
 
     public function setUp(): void
@@ -19,23 +18,23 @@ class RefundTest extends TestCase
 
         // response of success requests
         $respone = [
-            "Message" =>  "Approved",
-            "Success" =>  true,
-            "ActionCode" =>  null,
-            "AuthCode" =>  null,
-            "DecimalFraction" =>  3,
-            "ExternalTxnId" =>  null,
-            "IsEnableRefund" =>  false,
-            "MerchantReference" =>  null,
-            "NetworkReference" =>  null,
-            "ReceiptNumber" =>  null,
-            "ReceiverAccountNumber" =>  null,
-            "ReceiverName" =>  null,
-            "ReceiverScheme" =>  null,
-            "RefNumber" =>  "1233674",
-            "SystemReference" =>  0,
-            "SystemTxnId" =>  0,
-            "TxnDate" =>  null
+            'Message' => 'Approved',
+            'Success' => true,
+            'ActionCode' => null,
+            'AuthCode' => null,
+            'DecimalFraction' => 3,
+            'ExternalTxnId' => null,
+            'IsEnableRefund' => false,
+            'MerchantReference' => null,
+            'NetworkReference' => null,
+            'ReceiptNumber' => null,
+            'ReceiverAccountNumber' => null,
+            'ReceiverName' => null,
+            'ReceiverScheme' => null,
+            'RefNumber' => '1233674',
+            'SystemReference' => 0,
+            'SystemTxnId' => 0,
+            'TxnDate' => null,
         ];
 
         // set fake requests to make testing faster
@@ -44,30 +43,30 @@ class RefundTest extends TestCase
             'https://tnpg.moamalat.net/cube/paylink.svc/api/RefundTransaction' => function ($r) use ($respone) {
                 if ($r->offsetGet('MerchantId') == 'testing_authentication_failed') { // response for testing authentication failed
                     return Http::response([
-                        "Message" =>  "Authentication failed.",
-                        "StackTrace" =>  null,
-                        "ExceptionType" =>  "System.InvalidOperationException"
+                        'Message' => 'Authentication failed.',
+                        'StackTrace' => null,
+                        'ExceptionType' => 'System.InvalidOperationException',
                     ], 401);
                 }
                 if ($r->offsetExists('NetworkReference') && $r->offsetGet('NetworkReference') == 'testing_already_refunded') { // response for testing authentication failed
                     return Http::response([
-                        "Message" =>  "CUBEEX5250616:Transaction Already Refunded",
-                        "Success" =>  false,
-                        "ActionCode" =>  null,
-                        "AuthCode" =>  null,
-                        "DecimalFraction" =>  3,
-                        "ExternalTxnId" =>  null,
-                        "IsEnableRefund" =>  false,
-                        "MerchantReference" =>  null,
-                        "NetworkReference" =>  null,
-                        "ReceiptNumber" =>  null,
-                        "ReceiverAccountNumber" =>  null,
-                        "ReceiverName" =>  null,
-                        "ReceiverScheme" =>  null,
-                        "RefNumber" =>  null,
-                        "SystemReference" =>  0,
-                        "SystemTxnId" =>  0,
-                        "TxnDate" =>  null
+                        'Message' => 'CUBEEX5250616:Transaction Already Refunded',
+                        'Success' => false,
+                        'ActionCode' => null,
+                        'AuthCode' => null,
+                        'DecimalFraction' => 3,
+                        'ExternalTxnId' => null,
+                        'IsEnableRefund' => false,
+                        'MerchantReference' => null,
+                        'NetworkReference' => null,
+                        'ReceiptNumber' => null,
+                        'ReceiverAccountNumber' => null,
+                        'ReceiverName' => null,
+                        'ReceiverScheme' => null,
+                        'RefNumber' => null,
+                        'SystemReference' => 0,
+                        'SystemTxnId' => 0,
+                        'TxnDate' => null,
                     ], 200);
                 }
 
@@ -94,14 +93,13 @@ class RefundTest extends TestCase
         $this->assertInstanceOf(Refund::class, app('moamalat-pay-refund'));
     }
 
-
     /**
      * Test
      */
     public function test_refund_by_system_reference()
     {
         $this->transaction->refundBySystemReference('226214209277', '10');
-        $this->assertEquals($this->transaction->get("Message"), "Approved");
+        $this->assertEquals($this->transaction->get('Message'), 'Approved');
     }
 
     /**
@@ -110,7 +108,7 @@ class RefundTest extends TestCase
     public function test_refund_by_network_reference()
     {
         $this->transaction->refundByNetworkReference('226214209277', '10');
-        $this->assertEquals($this->transaction->get("Message"), "Approved");
+        $this->assertEquals($this->transaction->get('Message'), 'Approved');
     }
 
     /**
@@ -119,7 +117,7 @@ class RefundTest extends TestCase
     public function test_already_refunded()
     {
         $this->expectExceptionMessage('Transaction Already Refunded');
-        (new Refund())->refundByNetworkReference("testing_already_refunded", "10");
+        (new Refund())->refundByNetworkReference('testing_already_refunded', '10');
     }
 
     /**
@@ -129,7 +127,7 @@ class RefundTest extends TestCase
     {
         $this->expectExceptionMessage('Authentication failed.');
         Config::set('moamalat-pay.merchant_id', 'testing_authentication_failed');
-        (new Refund())->refundByNetworkReference("226214209277", "10");
+        (new Refund())->refundByNetworkReference('226214209277', '10');
     }
 
     /**
@@ -186,6 +184,6 @@ class RefundTest extends TestCase
             'SystemTxnId',
             'TxnDate',
         ];
-        $this->assertEquals($keys, array_keys($this->transaction->getAll()), "Keys are not equal");
+        $this->assertEquals($keys, array_keys($this->transaction->getAll()), 'Keys are not equal');
     }
 }

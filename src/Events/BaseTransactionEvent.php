@@ -12,8 +12,6 @@ abstract class BaseTransactionEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-
-
     /**
      * The notification instance.
      *
@@ -21,11 +19,9 @@ abstract class BaseTransactionEvent
      */
     public $notification;
 
-
     /**
      * Create a new event instance.
      *
-     * @param  MoamalatPayNotification  $notification
      * @return void
      */
     public function __construct(MoamalatPayNotification $notification)

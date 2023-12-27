@@ -2,15 +2,13 @@
 
 namespace MoamalatPay\Tests\Feature;
 
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use MoamalatPay\Pay;
 use MoamalatPay\Tests\TestCase;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
 class PayTest extends TestCase
 {
-
     use InteractsWithViews;
-
 
     /**
      * Test config.

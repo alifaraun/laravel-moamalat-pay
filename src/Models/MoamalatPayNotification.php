@@ -4,13 +4,12 @@ namespace MoamalatPay\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 /**
  * Class MoamalatPayNotification
- * @package MoamalatPay\Models
+ *
  * @version Sep 17, 2022, 5:12 pm UTC
  *
- * @property integer $id
+ * @property int $id
  * @property string $MerchantId
  * @property string $TerminalId
  * @property string $DateTimeLocalTrxn
@@ -26,12 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $PayerName
  * @property string $ActionCode
  * @property string $request
- * @property boolean $verified
+ * @property bool $verified
  * @property string $ip
  */
 class MoamalatPayNotification extends Model
 {
-
     public $fillable = [
         'MerchantId',
         'TerminalId',
@@ -49,7 +47,7 @@ class MoamalatPayNotification extends Model
         'ActionCode',
         'request',
         'verified',
-        'ip'
+        'ip',
     ];
 
     protected $casts = [
@@ -80,8 +78,6 @@ class MoamalatPayNotification extends Model
     {
         return config('moamalat-pay.notification.table', parent::getTable());
     }
-
-
 
     /**
      * Scope a query to only include approved transactions.

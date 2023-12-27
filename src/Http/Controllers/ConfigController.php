@@ -8,14 +8,11 @@ use MoamalatPay\Http\Requests\GenerateSecureKeyRequest;
 /**
  * Class ConfigController
  */
-
 class ConfigController extends BaseController
 {
-
     /**
      * Genearte SecureHash for use in payment transaction
      *
-     * @param GenerateSecureKeyRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function generateSecureKey(GenerateSecureKeyRequest $request)
@@ -24,13 +21,13 @@ class ConfigController extends BaseController
         $MerchantId = config('moamalat-pay.merchant_id');
         $amount = $request->amount;
         $merchantReference = $request->merchantReference;
-        $key =  pack("H*", config('moamalat-pay.key'));
-        $DateTimeLocalTrxn =  time();
+        $key = pack('H*', config('moamalat-pay.key'));
+        $DateTimeLocalTrxn = time();
         $encode_data = "Amount={$amount}&DateTimeLocalTrxn={$DateTimeLocalTrxn}&MerchantId={$MerchantId}&MerchantReference={$merchantReference}&TerminalId={$TerminalId}";
 
         return response()->json([
-            'secureHash' =>   hash_hmac('sha256', $encode_data, $key),
-            'DateTimeLocalTrxn' => $DateTimeLocalTrxn
+            'secureHash' => hash_hmac('sha256', $encode_data, $key),
+            'DateTimeLocalTrxn' => $DateTimeLocalTrxn,
         ]);
     }
 }

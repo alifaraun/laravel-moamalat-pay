@@ -4,7 +4,6 @@ namespace MoamalatPay;
 
 class Pay
 {
-
     public function init()
     {
         return view('moamalat-pay::pay')->render();

@@ -2,7 +2,6 @@
 
 namespace MoamalatPay\Tests\Feature;
 
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
@@ -20,7 +19,6 @@ class NotificationsAPITest extends TestCase
 {
     use RefreshDatabase;
 
-
     /**
      * Test config.
      */
@@ -34,13 +32,12 @@ class NotificationsAPITest extends TestCase
         $this->assertNotNull(config('moamalat-pay.notification.key'));
     }
 
-
     /**
      * Initialize base notifications api testing
      *
-     * @param array $dispatched events should dispatched
-     * @param array $notdispatched events should not dispatched
-     * @param array $extraData override or add extra properties to transaction
+     * @param  array  $dispatched events should dispatched
+     * @param  array  $notdispatched events should not dispatched
+     * @param  array  $extraData override or add extra properties to transaction
      * @return void
      */
     public function init_test_api_notifications_transaction($dispatched, $notdispatched, $extraData = [])
@@ -48,7 +45,7 @@ class NotificationsAPITest extends TestCase
         Event::fake();
 
         // load request from json to array
-        $data = json_decode(file_get_contents(__DIR__ . './../_fixtures/transactions/verfied.json'), true);
+        $data = json_decode(file_get_contents(__DIR__.'./../_fixtures/transactions/verfied.json'), true);
         $body = array_merge($data, $extraData);
 
         // call api notificaitons
@@ -56,7 +53,7 @@ class NotificationsAPITest extends TestCase
         //There is issuse with $this->postJson it sends body empty , that is why I use $this->withHeaders
         $this->withHeaders([])->post(route(config('moamalat-pay.notification.route_name')), $body)
             ->assertStatus(200)
-            ->assertJson(["Message" => 'Success', 'Success' => true]);
+            ->assertJson(['Message' => 'Success', 'Success' => true]);
 
         // assert dispatched events
         foreach ($dispatched as $e) {
@@ -71,7 +68,6 @@ class NotificationsAPITest extends TestCase
         // validated transaction saved in database
         $this->assertDatabaseCount(config('moamalat-pay.notification.table'), 1);
     }
-
 
     /**
      * Test approved transaction notification
@@ -89,11 +85,10 @@ class NotificationsAPITest extends TestCase
                 ApprovedVoidSaleTransaction::class,
                 ApprovedVoidRefundTransaction::class,
                 UnverfiedTransaction::class,
-                DisallowedRequestEvent::class
+                DisallowedRequestEvent::class,
             ]
         );
     }
-
 
     /**
      * Test approved refund transaction notification
@@ -111,14 +106,13 @@ class NotificationsAPITest extends TestCase
                 ApprovedVoidSaleTransaction::class,
                 ApprovedVoidRefundTransaction::class,
                 UnverfiedTransaction::class,
-                DisallowedRequestEvent::class
+                DisallowedRequestEvent::class,
             ],
             [
-                'TxnType' => 2
+                'TxnType' => 2,
             ]
         );
     }
-
 
     /**
      * Test approved void sale transaction notification
@@ -136,14 +130,13 @@ class NotificationsAPITest extends TestCase
                 ApprovedRefundTransaction::class,
                 ApprovedVoidRefundTransaction::class,
                 UnverfiedTransaction::class,
-                DisallowedRequestEvent::class
+                DisallowedRequestEvent::class,
             ],
             [
-                'TxnType' => 3
+                'TxnType' => 3,
             ]
         );
     }
-
 
     /**
      * Test approved void refund transaction notification
@@ -161,15 +154,13 @@ class NotificationsAPITest extends TestCase
                 ApprovedRefundTransaction::class,
                 ApprovedVoidSaleTransaction::class,
                 UnverfiedTransaction::class,
-                DisallowedRequestEvent::class
+                DisallowedRequestEvent::class,
             ],
             [
-                'TxnType' => 4
+                'TxnType' => 4,
             ]
         );
     }
-
-
 
     /**
      * Test approved transaction notification
@@ -194,7 +185,6 @@ class NotificationsAPITest extends TestCase
             ]
         );
     }
-
 
     /**
      * Test notify from disallowed ip
