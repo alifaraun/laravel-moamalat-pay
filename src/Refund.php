@@ -38,7 +38,7 @@ class Refund
     /**
      * Create a new refund instance.
      *
-     *  @return void
+     * @return void
      */
     public function __construct()
     {
@@ -123,7 +123,7 @@ class Refund
     /**
      * Get property of transaction
      *
-     * @param $property key
+     * @param  $property  key
      * @return mixed
      */
     public function get($property)

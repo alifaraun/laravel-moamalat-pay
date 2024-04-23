@@ -74,7 +74,7 @@ class Transaction
     /**
      * Get property of transaction
      *
-     * @param $property key
+     * @param  $property  key
      * @return mixed
      */
     public function get($property)

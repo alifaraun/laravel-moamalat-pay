@@ -35,9 +35,9 @@ class NotificationsAPITest extends TestCase
     /**
      * Initialize base notifications api testing
      *
-     * @param  array  $dispatched events should dispatched
-     * @param  array  $notdispatched events should not dispatched
-     * @param  array  $extraData override or add extra properties to transaction
+     * @param  array  $dispatched  events should dispatched
+     * @param  array  $notdispatched  events should not dispatched
+     * @param  array  $extraData  override or add extra properties to transaction
      * @return void
      */
     public function init_test_api_notifications_transaction($dispatched, $notdispatched, $extraData = [])
