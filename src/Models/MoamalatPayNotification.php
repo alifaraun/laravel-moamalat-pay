@@ -50,24 +50,32 @@ class MoamalatPayNotification extends Model
         'ip',
     ];
 
-    protected $casts = [
-        'MerchantId' => 'string',
-        'TerminalId' => 'string',
-        'DateTimeLocalTrxn' => 'string',
-        'TxnType' => 'string',
-        'Message' => 'string',
-        'PaidThrough' => 'string',
-        'SystemReference' => 'string',
-        'NetworkReference' => 'string',
-        'MerchantReference' => 'string',
-        'Amount' => 'string',
-        'Currency' => 'string',
-        'PayerAccount' => 'string',
-        'PayerName' => 'string',
-        'ActionCode' => 'string',
-        'request' => 'string',
-        'verified' => 'string',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'MerchantId' => 'string',
+            'TerminalId' => 'string',
+            'DateTimeLocalTrxn' => 'string',
+            'TxnType' => 'string',
+            'Message' => 'string',
+            'PaidThrough' => 'string',
+            'SystemReference' => 'string',
+            'NetworkReference' => 'string',
+            'MerchantReference' => 'string',
+            'Amount' => 'string',
+            'Currency' => 'string',
+            'PayerAccount' => 'string',
+            'PayerName' => 'string',
+            'ActionCode' => 'string',
+            'request' => 'string',
+            'verified' => 'boolean',
+        ];
+    }
 
     /**
      * Get the table associated with the model.
