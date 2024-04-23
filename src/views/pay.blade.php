@@ -105,7 +105,7 @@
             }
 
 
-            const _moamalatPay = new MoamalataPay(
+            var _moamalatPay = new MoamalataPay(
                 "{{ config('moamalat-pay.merchant_id') }}",
                 "{{ config('moamalat-pay.terminal_id') }}",
                 0,
