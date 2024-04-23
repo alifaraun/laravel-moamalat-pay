@@ -1,7 +1,5 @@
-
-
-
 # Laravel Moamalat Pay
+
 [![Build Status](https://github.com/alifaraun/laravel-moamalat-pay/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/alifaraun/laravel-moamalat-pay/actions)
 [![Latest Stable Version](https://poser.pugx.org/alifaraun/laravel-moamalat-pay/v/stable.svg)](https://packagist.org/packages/alifaraun/laravel-moamalat-pay)
 [![Total Downloads](https://poser.pugx.org/alifaraun/laravel-moamalat-pay/downloads.svg)](https://packagist.org/packages/alifaraun/laravel-moamalat-pay)
@@ -10,35 +8,35 @@
 This package allows you to easily use Moamalat [ligthbox](https://docs.moamalat.net/lightBox.html) to add payment gateway in your laravel project.
 
 ---
+
 **NOTE**
 This is not official library from Moamalat , It is just an open source Library.
+
 ---
 
+## Table of contents
 
-## Table of contents 
 - [Installation](#installation)
 - [Configuration File](#configuration-file)
 - [Configuration for testing purpose](#configuration-for-testing-purpose)
-  * [Merchant](#merchant)
-  * [Card](#card)
+  - [Merchant](#merchant)
+  - [Card](#card)
 - [Usage](#usage)
-    + [Laravel componet](#laravel-componet)
-    + [Laravel methods](#laravel-methods)
-    + [Front end Javascript](#front-end-javascript)
-    + [Check processing status](#check-processing-status)
-    + [Get Transaction in back-end](#get-transaction-in-back-end)
-      - [Examples](#examples)
-    + [Notifications Service (Webhook)](#notifications-service-webhook)
-      - [Available Scopes](#available-scopes)
-      - [Events](#events)
-    + [Refund and Void Transactions](#refund-and-void-transactions)
-      - [Examples](#examples-1)
+  - [Laravel componet](#laravel-componet)
+  - [Laravel methods](#laravel-methods)
+  - [Front end Javascript](#front-end-javascript)
+  - [Check processing status](#check-processing-status)
+  - [Get Transaction in back-end](#get-transaction-in-back-end)
+    - [Examples](#examples)
+  - [Notifications Service (Webhook)](#notifications-service-webhook)
+    - [Available Scopes](#available-scopes)
+    - [Events](#events)
+  - [Refund and Void Transactions](#refund-and-void-transactions)
+    - [Examples](#examples-1)
 - [Testing](#testing)
 - [Security](#security)
 - [Credits](#credits)
 - [License](#license)
-
-
 
 ## Installation
 
@@ -50,12 +48,13 @@ composer require alifaraun/laravel-moamalat-pay
 
 **Laravel Version Compatibility**
 
-| Laravel | Package  | install command  |
-|:--------|:---------|:-----------------|
-| 10.x.x   | 4.x      | `composer require alifaraun/laravel-moamalat-pay "^4.0"` |
-| 9.x.x   | 3.x      | `composer require alifaraun/laravel-moamalat-pay "^3.0"` |
-| 8.x.x   | 2.x      | `composer require alifaraun/laravel-moamalat-pay "^2.0"` |
-| ^7.25.0  | 1.x      | `composer require alifaraun/laravel-moamalat-pay "^1.0"` |
+| Laravel | Package | install command                                          |
+| :------ | :------ | :------------------------------------------------------- |
+| 11.x.x  | 5.x     | `composer require alifaraun/laravel-moamalat-pay "^5.0"` |
+| 10.x.x  | 4.x     | `composer require alifaraun/laravel-moamalat-pay "^4.0"` |
+| 9.x.x   | 3.x     | `composer require alifaraun/laravel-moamalat-pay "^3.0"` |
+| 8.x.x   | 2.x     | `composer require alifaraun/laravel-moamalat-pay "^2.0"` |
+| ^7.25.0 | 1.x     | `composer require alifaraun/laravel-moamalat-pay "^1.0"` |
 
 If you want to customize configurations:
 
@@ -78,17 +77,17 @@ return [
 	| These options to set your configurations of muamalat
 	|
 	*/
-	
+
 	// MID => merchant_id or outlet_number
 	'merchant_id' => env('MOAMALATPAY_MID'),
-	
+
 	// TID => terminal_id
 	'terminal_id' => env('MOAMALATPAY_TID'),
-	
+
 	// Secure key
 	'key' => env('MOAMALATPAY_KEY'),
-	
-	
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Production
@@ -99,7 +98,7 @@ return [
 	|
 	*/
 	'production' => env('MOAMALATPAY_PRODUCTION', false),
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Show
@@ -110,8 +109,8 @@ return [
 	|
 	*/
 	'show_logs' => false,
-	
-	
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Generate Secure Hash api
@@ -128,8 +127,8 @@ return [
 	'url' =>  'moamalat-pay/securekey',
 	'route_name' =>  'moamalat_pay.generate_securekey',
 	],
-	
-	
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Notification (Webhook) api
@@ -156,7 +155,7 @@ return [
 	'table' => 'moamalat_pay_notifications',
 	'allowed_ips' => ['*'],
     	]
-]; 
+];
 ```
 
 set your configurations in `.env` file:
@@ -171,54 +170,64 @@ MOAMALATPAY_PRODUCTION=
 
 ## Configuration for testing purpose
 
-### Merchant 
-``` bash
+### Merchant
+
+```bash
 Merchant id	: 10081014649
 Terminal Id	: 99179395
 Secure key	: 39636630633731362D663963322D346362642D386531662D633963303432353936373431
 ```
 
-### Card 
-``` bash
+### Card
+
+```bash
 Card : 6394993077260781
 EXP  : 12/24
 OTP  : 111111
 ```
 
-
 ## Usage
 
 #### Laravel componet
+
 ```blade
 // Initialize pay
 <x-moamalat-pay />
 
-// when pass amount property, it will show pay form directly  
+// when pass amount property, it will show pay form directly
 <x-moamalat-pay amount="1000" />
 ```
+
 #### Laravel methods
+
 To call it using methods
+
 ```php
 // Initialize pay
 app('moamalat-pay')->init();
 
 // call pay
-// $amount int libyan dirham not dinar 
+// $amount int libyan dirham not dinar
 //$reference is optional
-app('moamalat-pay')->pay(int $amount,string $reference = ''); 
+app('moamalat-pay')->pay(int $amount,string $reference = '');
 ```
-#### Front end Javascript 
-To call pay from js 
+
+#### Front end Javascript
+
+To call pay from js
+
 ```js
 _moamalatPay.pay(int amount,string reference = '')
 ```
 
-#### Check processing status 
-Available events to check if operation success or fail  
+#### Check processing status
+
+Available events to check if operation success or fail
+
 ```js
-addEventListener("moamalatCompleted", function(e) {
-    e.detail // response data
-    /* e.detail
+addEventListener("moamalatCompleted", function (e) {
+  e.detail; // response data
+  /* e.detail
 	{
 	    "TxnDate": "220822141359",
 	    "SystemReference": "1233114",
@@ -236,11 +245,11 @@ addEventListener("moamalatCompleted", function(e) {
 	    "TokenCard": ""
 	}
     */
-})
+});
 
-addEventListener("moamalatError", function(e) {
-    e.detail // response data
-    /* e.detail
+addEventListener("moamalatError", function (e) {
+  e.detail; // response data
+  /* e.detail
 	{
 	    "error": "CUBEEX5212216:Authentication Failed",
 	    "Amount": "200.031",
@@ -249,13 +258,10 @@ addEventListener("moamalatError", function(e) {
 	    "SecureHash": "1C8B1301AD4C00BE66EC25FD45A81D0C4030C79EF53CA903FA5009ECCAD08D46"
 	}
     */
-})
+});
 
-addEventListener("moamalatCancel", function() {
-
-})
+addEventListener("moamalatCancel", function () {});
 ```
-
 
 #### Get Transaction in back-end
 
@@ -318,7 +324,7 @@ $transaction = new Transaction("223414600869","1641729671");
 
 
 $transaction->getAll();
-/* return 
+/* return
         [
           "Amnt" => "10",
           "AmountTrxn" => "10",
@@ -366,18 +372,19 @@ $transaction->getWithDefault('Card','card-not-found');
 // return card-not-found
 
 $transaction->checkApproved();
-// if transaction status is Approved it will return true 
+// if transaction status is Approved it will return true
 
 $transaction->checkApproved(10000,'639499XXXXXX0781');
 // if transaction is status is Approved , amount=10000 and CardNo=639499XXXXXX0781 it will return true
 ```
 
 ### Notifications Service (Webhook)
+
 Notification Services allow merchants to receive notifications whenever a transaction is generated for their accounts
 
 We save all notifications in database with fire events depends on transaction type and status
 
-``` php
+```php
 /*
 MoamalatPay\Models\MoamalatPayNotification \\ Eloquent Model
 \\ properites
@@ -402,23 +409,25 @@ verified
 created_at
 */
 ```
+
 #### Available Scopes
 
-``` php 
+```php
 // filter to get approved transactions (ActionCode = 00)
-MoamalatPay\Models\MoamalatPayNotification::approved() 
+MoamalatPay\Models\MoamalatPayNotification::approved()
 
 // filter to get verified transactions (verified = 1)
-MoamalatPay\Models\MoamalatPayNotification::verified() 
+MoamalatPay\Models\MoamalatPayNotification::verified()
 
-// filter to get transactions for currency terminal_id and merchant_id in config 
-MoamalatPay\Models\MoamalatPayNotification::currentCredential() 
+// filter to get transactions for currency terminal_id and merchant_id in config
+MoamalatPay\Models\MoamalatPayNotification::currentCredential()
 ```
 
 #### Events
- Example of how to add listener , check [laravel documentation](https://laravel.com/docs/events) for more info 
 
-``` php 
+Example of how to add listener , check [laravel documentation](https://laravel.com/docs/events) for more info
+
+```php
 // event will be fired when receive request from ip not exists in allowed_ips in config of moamalat-pay
 Event::listen(function (MoamalatPay\Events\DisallowedRequestEvent $event) {
 });
@@ -457,16 +466,15 @@ Event::listen(function (MoamalatPay\Events\ApprovedVoidSaleTransaction $event) {
 });
 
 // event will be fired after check secureHas is verified and transaction status is approved
-// and type of transaction is : 4: Void Refund 
+// and type of transaction is : 4: Void Refund
 Event::listen(function (MoamalatPay\Events\ApprovedVoidRefundTransaction $event) {
    $event->notification // Eloquent Model of transaction
 });
 
 ```
 
-
-
 #### Refund and Void Transactions
+
 When the refund is called before settlement (usually settlement at the end of the day), it will be void, otherwise it will be refunded
 
 ```php
@@ -474,9 +482,9 @@ When the refund is called before settlement (usually settlement at the end of th
 /**
  * Refund transaction by system reference of transaction
  * @param string|integer $systemReference
- * @param string|integer $amount 
+ * @param string|integer $amount
  * @return array content response of moamalat
- */ 
+ */
 app('moamalat-pay-refund')->refundBySystemReference($systemReference, $amount)->getAll()
 // Throws an exception if there is a problem in refund the transaction
 
@@ -517,17 +525,17 @@ app('moamalat-pay-refund')->refundByNetworkReference($networkReference, $amount)
 
 ```php
 $r = app('moamalat-pay-refund')->refundBySystemReference("1233114", "10");
-// or 
+// or
 $r = app('moamalat-pay-refund')->refundByNetworkReference("223414600869", "10");
 
-// will return instance of MoamalatPay\Refund class 
- 
+// will return instance of MoamalatPay\Refund class
+
 /**
  * Get all properties of reponse
  * @return array
  */
-$r->getAll(); 
-/* response 
+$r->getAll();
+/* response
 {
     "Message": "Approved",
     "Success": true,
@@ -554,7 +562,7 @@ $r->getAll();
  * @param $property key
  * @return mixed
  */
-$r->get($property); 
+$r->get($property);
 $r->get('Message');
 // return Approved
 
@@ -566,7 +574,7 @@ $r->get('Message');
  * @param $default
  * @return mixed
  */
-$r->getWithDefault($property, $default = null);  
+$r->getWithDefault($property, $default = null);
 $r->getWithDefault('Card', 'No Card');
 // return No Card
 
@@ -575,13 +583,15 @@ $r->getWithDefault('Card', 'No Card');
  * Get SystemReference of new refund transaction
  * @return string|integer
  */
-$r->getRefNumber(); 
+$r->getRefNumber();
 // return 1233678
 
 ```
 
-## Testing 
+## Testing
+
 Run the tests with:
+
 ```
 composer test
 // or
@@ -589,20 +599,18 @@ composer test
 ```
 
 Run Static Analysis Tool (PHPStan)
+
 ```
 composer analyse
 // or
 ./vendor/bin/phpstan analyse
 ```
 
-
-
-<!-- 
+<!--
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
  -->
-
 
 ## Security
 
@@ -610,9 +618,9 @@ If you discover any security related issues, please email ali1996426@hotmail.com
 
 ## Credits
 
--   [Ali Faraun](https://github.com/alifaraun)
--   [All Contributors](../../contributors)
+- [Ali Faraun](https://github.com/alifaraun)
+- [All Contributors](../../contributors)
 
 ## License
 
-The MIT License (MIT) 
+The MIT License (MIT)
