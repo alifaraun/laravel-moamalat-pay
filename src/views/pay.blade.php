@@ -19,6 +19,7 @@
                     this.amount = amount;
                     this.merchantReference = merchantReference;
                     this.debug = debug;
+                    this.isCompleteCalled = false
                 }
 
                 log(data) {
@@ -68,6 +69,7 @@
                         TrxDateTime: secureHashResponse.DateTimeLocalTrxn,
                         SecureHash: secureHashResponse.secureHash,
                         completeCallback: function(data) {
+                            this.isCompleteCalled = true;
                             window.dispatchEvent(
                                 new CustomEvent('moamalatCompleted', {
                                     detail: data
@@ -91,9 +93,11 @@
                             });
                         },
                         cancelCallback: function() {
-                            window.dispatchEvent(
-                                new CustomEvent('moamalatCancel')
-                            )
+                               if (!this.isCompleteCalled) {
+                                    window.dispatchEvent(
+                                    new CustomEvent('moamalatCancel')
+                                )
+                               }
                             parent_.log({
                                 "status": "canceled"
                             });
