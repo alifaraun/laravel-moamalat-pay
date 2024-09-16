@@ -43,6 +43,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Enable Cancel Event On Success
+    |--------------------------------------------------------------------------
+    |
+    | If the enable_cancel_event_on_success is set to "true", the cancel event will be triggered even if the payment is successful
+    |
+    */
+    'enable_cancel_event_on_success' => true,
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Generate Secure Hash api
     |--------------------------------------------------------------------------
     |

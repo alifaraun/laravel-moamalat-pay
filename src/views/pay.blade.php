@@ -13,11 +13,12 @@
         if (window.dispatchEvent) {
 
             class MoamalataPay {
-                constructor(MID, TID, amount, merchantReference = "", debug = false) {
+                constructor(MID, TID, amount, merchantReference = "", enableCancelEventOnSuccess = true, debug = false) {
                     this.MID = MID;
                     this.TID = TID;
                     this.amount = amount;
                     this.merchantReference = merchantReference;
+                    this.enableCancelEventOnSuccess = enableCancelEventOnSuccess;
                     this.debug = debug;
                     this.isCompleteCalled = false
                 }
@@ -58,6 +59,7 @@
                     this.log("Starting pay , mode => {{ config('moamalat-pay.production') ? 'produciton' : 'test' }}");
 
                     let parent_ = this;
+                    this.isCompleteCalled = false;
 
                     const secureHashResponse = await this.fetchSecureHash();
 
@@ -93,11 +95,14 @@
                             });
                         },
                         cancelCallback: function() {
-                               if (!this.isCompleteCalled) {
-                                    window.dispatchEvent(
-                                    new CustomEvent('moamalatCancel')
-                                )
-                               }
+                            if (!parent_.enableCancelEventOnSuccess && this.isCompleteCalled) {
+                                return;
+                            }
+
+                            window.dispatchEvent(
+                                new CustomEvent('moamalatCancel')
+                            )
+
                             parent_.log({
                                 "status": "canceled"
                             });
@@ -114,6 +119,7 @@
                 "{{ config('moamalat-pay.terminal_id') }}",
                 0,
                 "",
+                "{{ config('moamalat-pay.enable_cancel_event_on_success') }}",
                 "{{ config('moamalat-pay.show_logs') }}",
             )
 
