@@ -26,6 +26,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
             'merchant_id' => '10004188779',
             'terminal_id' => '49077229',
             'key' => '39353638663431622D303136622D343235322D623330632D383361633838383965373965',
+            'key_hex' => false,
             'production' => false,
             'show_logs' => true,
             'generate-securekey' => [

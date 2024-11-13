@@ -87,6 +87,8 @@ return [
 	// Secure key
 	'key' => env('MOAMALATPAY_KEY'),
 
+    // Is key hex
+    'key_hex' => env('MOAMALATPAY_KEY_HEX', true),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -184,14 +186,14 @@ MOAMALATPAY_PRODUCTION=
 ```bash
 Merchant id	: 10081014649
 Terminal Id	: 99179395
-Secure key	: 39636630633731362D663963322D346362642D386531662D633963303432353936373431
+Secure key	: 3a488a89b3f7993476c252f017c488bb
 ```
 
 ### Card
 
 ```bash
-Card : 6394993077260781
-EXP  : 12/24
+Card : 6395003016111159
+EXP  : 02/26
 OTP  : 111111
 ```
 

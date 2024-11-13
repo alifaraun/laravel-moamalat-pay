@@ -32,7 +32,13 @@ class Transaction
     {
         $TerminalId = config('moamalat-pay.terminal_id');
         $MerchantId = config('moamalat-pay.merchant_id');
-        $key = pack('H*', config(('moamalat-pay.key')));
+
+        if (config('moamalat-pay.key_hex')) {
+            $key = hex2bin(config('moamalat-pay.key'));
+        } else {
+            $key = pack('H*', config('moamalat-pay.key'));
+        }
+
         $DateTimeLocalTrxn = time();
         $encode_data = "DateTimeLocalTrxn={$DateTimeLocalTrxn}&MerchantId={$MerchantId}&TerminalId={$TerminalId}";
 

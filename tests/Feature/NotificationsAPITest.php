@@ -27,6 +27,7 @@ class NotificationsAPITest extends TestCase
         $this->assertNotNull(config('moamalat-pay.merchant_id'));
         $this->assertNotNull(config('moamalat-pay.terminal_id'));
         $this->assertNotNull(config('moamalat-pay.key'));
+        $this->assertNotNull(config('moamalat-pay.key_hex'));
         $this->assertNotNull(config('moamalat-pay.production'));
         $this->assertNotNull(config('moamalat-pay.show_logs'));
         $this->assertNotNull(config('moamalat-pay.notification.key'));

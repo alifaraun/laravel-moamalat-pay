@@ -117,7 +117,7 @@ class RefundTest extends TestCase
     public function test_already_refunded()
     {
         $this->expectExceptionMessage('Transaction Already Refunded');
-        (new Refund())->refundByNetworkReference('testing_already_refunded', '10');
+        (new Refund)->refundByNetworkReference('testing_already_refunded', '10');
     }
 
     /**
@@ -127,7 +127,7 @@ class RefundTest extends TestCase
     {
         $this->expectExceptionMessage('Authentication failed.');
         Config::set('moamalat-pay.merchant_id', 'testing_authentication_failed');
-        (new Refund())->refundByNetworkReference('226214209277', '10');
+        (new Refund)->refundByNetworkReference('226214209277', '10');
     }
 
     /**
