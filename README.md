@@ -60,7 +60,7 @@ composer require alifaraun/laravel-moamalat-pay
 If you want to customize configurations:
 
 ```bash
-php artisan vendor:publish --provider="moamalat-pay"
+php artisan vendor:publish --tag="moamalat-pay"
 ```
 
 ## Configuration File
