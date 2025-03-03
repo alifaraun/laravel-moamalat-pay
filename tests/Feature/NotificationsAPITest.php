@@ -45,7 +45,7 @@ class NotificationsAPITest extends TestCase
         Event::fake();
 
         // load request from json to array
-        $data = json_decode(file_get_contents(__DIR__ . './../_fixtures/transactions/verfied.json'), true);
+        $data = json_decode(file_get_contents(__DIR__.'./../_fixtures/transactions/verfied.json'), true);
         $body = array_merge($data, $extraData);
 
         // call api notificaitons

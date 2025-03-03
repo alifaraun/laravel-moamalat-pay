@@ -15,7 +15,7 @@ class Refund
     private $response;
 
     /**
-     * Terminad ID
+     * Terminal ID
      *
      * @var string|int
      */

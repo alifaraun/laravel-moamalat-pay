@@ -50,6 +50,7 @@ composer require alifaraun/laravel-moamalat-pay
 
 | Laravel | Package | install command                                          |
 | :------ | :------ | :------------------------------------------------------- |
+| 12.x.x  | 6.x     | `composer require alifaraun/laravel-moamalat-pay "^6.0"` |
 | 11.x.x  | 5.x     | `composer require alifaraun/laravel-moamalat-pay "^5.0"` |
 | 10.x.x  | 4.x     | `composer require alifaraun/laravel-moamalat-pay "^4.0"` |
 | 9.x.x   | 3.x     | `composer require alifaraun/laravel-moamalat-pay "^3.0"` |
@@ -189,8 +190,10 @@ Secure key	: 3a488a89b3f7993476c252f017c488bb
 ### Card
 
 ```bash
-Card : 6395003016111159
-EXP  : 02/26
+Card : 6395043835180860
+Card : 6395043165725698
+Card : 6395043170446256
+EXP  : 01/27
 OTP  : 111111
 ```
 
@@ -236,22 +239,21 @@ Available events to check if operation success or fail
 addEventListener("moamalatCompleted", function (e) {
   e.detail; // response data
   /* e.detail
-	{
-	    "TxnDate": "220822141359",
-	    "SystemReference": "1233114",
-	    "NetworkReference": "223414600869",
-	    "MerchantReference": "1641729671",
-	    "Amount": "10",
-	    "Currency": "434",
-	    "PaidThrough": "Card",
-	    "PayerAccount": "639499XXXXXX0781",
-	    "PayerName": "SS",
-	    "ProviderSchemeName": "",
-	    "SecureHash": "EB085D519BCC0887EA1031939F15DE230991E8C1E8731CD11A6916A5B7FC29D8",
-	    "DisplayData": "",
-	    "TokenCustomerId": "",
-	    "TokenCard": ""
-	}
+    {
+    "TxnDate": "250303164850",
+    "SystemReference": "1301679",
+    "NetworkReference": "506216680586",
+    "MerchantReference": "test-demo",
+    "Amount": "1000",
+    "Currency": "434",
+    "PaidThrough": "Card",
+    "PayerAccount": "639504XXXXXX3733",
+    "PayerName": "ALI",
+    "ProviderSchemeName": "",
+    "SecureHash": "915B22C4E2A96DB03F755D4254F65C87486AE3B1C19B9BCDE9481836832F4822",
+    "CardToken": null,
+    "CustomerId": null
+    }
     */
 });
 
@@ -333,48 +335,52 @@ $transaction = new Transaction("223414600869","1641729671");
 
 $transaction->getAll();
 /* return
-        [
-          "Amnt" => "10",
-          "AmountTrxn" => "10",
-          "AuthCode" => null,
-          "CardNo" => "639499XXXXXX0781",
-          "CardType" => "",
-          "Currency" => "LYD",
-          "ExternalTxnId" => null,
-          "FeeAmnt" => "0",
-          "HasToken" => true,
-          "ISForceSendCVCForRefund" => true,
-          "IsMustVoidTotalAmount" => true,
-          "IsPointTrasnaction" => false,
-          "IsRefund" => false,
-          "IsRefundEnabled" => true,
-          "IsSend" => false,
-          "MerchantReference" => "1641729671",
-          "MobileNumber" => null,
-          "OriginalTxnId" => "",
-          "RRN" => "223414600869",
-          "ReceiptNo" => "223414600869",
-          "RefundButton" => 1,
-          "RefundReason" => "",
-          "RefundSource" => "",
-          "RefundUserCreator" => "",
-          "RelatedTxnTotalAmount" => null,
-          "RemainingRefundAmount" => "10",
-          "ResCodeDesc" => "Approved",
-          "STAN" => "600869",
-          "SenderName" => "SS",
-          "Status" => "Approved",
-          "TipAmnt" => "0",
-          "TransType" => "Sale",
-          "TransactionChannel" => "Card",
-          "TransactionId" => "1233114",
-          "TxnDateTime" => "22/08/22  14:13",
-          "TxnIcon" => 2
-        ]
+    [
+      "TransactionChannel" => "Card",
+      "CardNo" => "639504XXXXXX0860",
+      "SenderName" => "OMAR",
+      "CardType" => null,
+      "Amnt" => "1000",
+      "AmountTrxn" => "1000",
+      "FeeAmnt" => "0.000",
+      "TipAmnt" => "0.000",
+      "Status" => "Approved",
+      "Currency" => "LYD",
+      "TransType" => "Sale",
+      "IsPointTrasnaction" => false,
+      "STAN" => "625396",
+      "RRN" => "506118625396",
+      "MerchantReference" => "test-demo",
+      "ReceiptNo" => "506118625396",
+      "MobileNumber" => null,
+      "TransactionId" => "1301669",
+      "ExternalTxnId" => null,
+      "TxnDateTime" => "02/03/25  18=>25",
+      "IsRefundEnabled" => true,
+      "ResCodeDesc" => "Approved",
+      "IsSend" => false,
+      "ISForceSendCVCForRefund" => true,
+      "HasToken" => true,
+      "AuthCode" => null,
+      "RefundButton" => 0,
+      "RemainingRefundAmount" => "1000.000",
+      "TerminalId" => 49077229,
+      "IsRefund" => false,
+      "RefundReason" => "",
+      "RefundSource" => "",
+      "RefundUserCreator" => "",
+      "OriginalTxnId" => "",
+      "TxnIcon" => 2,
+      "IsMustVoidTotalAmount" => false,
+      "IsCardPresent" => false,
+      "RelatedTxnTotalAmount" => null,
+      "UserDefinedData" => [],
+      "InvoiceServiceSummary" => null
+    ]
 */
 
 $transaction->get('CardNo');
-// return 639499XXXXXX0781
+// return 639504XXXXXX0860
 
 $transaction->getWithDefault('Card','card-not-found');
 // return card-not-found
@@ -382,8 +388,8 @@ $transaction->getWithDefault('Card','card-not-found');
 $transaction->checkApproved();
 // if transaction status is Approved it will return true
 
-$transaction->checkApproved(10000,'639499XXXXXX0781');
-// if transaction is status is Approved , amount=10000 and CardNo=639499XXXXXX0781 it will return true
+$transaction->checkApproved(10000,'639504XXXXXX0860');
+// if transaction is status is Approved , amount=10000 and CardNo=639504XXXXXX0860 it will return true
 ```
 
 ### Notifications Service (Webhook)
@@ -508,23 +514,29 @@ app('moamalat-pay-refund')->refundByNetworkReference($networkReference, $amount)
 
 /* response : return of getAll() method
 {
-    "Message": "Approved",
-    "Success": true,
-    "ActionCode": null,
-    "AuthCode": null,
-    "DecimalFraction": 3,
-    "ExternalTxnId": null,
-    "IsEnableRefund": false,
-    "MerchantReference": null,
-    "NetworkReference": null,
-    "ReceiptNumber": null,
-    "ReceiverAccountNumber": null,
-    "ReceiverName": null,
-    "ReceiverScheme": null,
-    "RefNumber": "1233678", // System reference for the new refund transaction
-    "SystemReference": 0,
-    "SystemTxnId": 0,
-    "TxnDate": null
+  "SystemTxnId": 0,
+  "ActionCode": null,
+  "AuthCode": null,
+  "ExternalTxnId": null,
+  "RefNumber": "1301681", // System reference for the new refund transaction
+  "TxnDate": null,
+  "ReceiptNumber": null,
+  "ReceiverAccountNumber": null,
+  "ReceiverName": null,
+  "ReceiverScheme": null,
+  "MerchantReference": null,
+  "SystemReference": 0,
+  "NetworkReference": null,
+  "IsEnableRefund": false,
+  "DecimalFraction": 3,
+  "IsYallaRefundPending": false,
+  "TransactionId": null,
+  "ReferenceId": null,
+  "Success": true,
+  "Message": "Approved",
+  "SecureHashData": null,
+  "SecureHash": null,
+  "StatusCode": 200
 }
 */
 ```
@@ -545,23 +557,29 @@ $r = app('moamalat-pay-refund')->refundByNetworkReference("223414600869", "10");
 $r->getAll();
 /* response
 {
-    "Message": "Approved",
-    "Success": true,
-    "ActionCode": null,
-    "AuthCode": null,
-    "DecimalFraction": 3,
-    "ExternalTxnId": null,
-    "IsEnableRefund": false,
-    "MerchantReference": null,
-    "NetworkReference": null,
-    "ReceiptNumber": null,
-    "ReceiverAccountNumber": null,
-    "ReceiverName": null,
-    "ReceiverScheme": null,
-    "RefNumber": "1233678", // System reference for the new refund transaction
-    "SystemReference": 0,
-    "SystemTxnId": 0,
-    "TxnDate": null
+  "SystemTxnId": 0,
+  "ActionCode": null,
+  "AuthCode": null,
+  "ExternalTxnId": null,
+  "RefNumber": "1301681", // System reference for the new refund transaction
+  "TxnDate": null,
+  "ReceiptNumber": null,
+  "ReceiverAccountNumber": null,
+  "ReceiverName": null,
+  "ReceiverScheme": null,
+  "MerchantReference": null,
+  "SystemReference": 0,
+  "NetworkReference": null,
+  "IsEnableRefund": false,
+  "DecimalFraction": 3,
+  "IsYallaRefundPending": false,
+  "TransactionId": null,
+  "ReferenceId": null,
+  "Success": true,
+  "Message": "Approved",
+  "SecureHashData": null,
+  "SecureHash": null,
+  "StatusCode": 200
 }
 */
 

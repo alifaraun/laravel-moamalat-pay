@@ -10,7 +10,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
         // additional setup
-        $this->withFactories(__DIR__ . '/../src/database/factories');
+        $this->withFactories(__DIR__.'/../src/database/factories');
     }
 
     protected function getPackageProviders($app)

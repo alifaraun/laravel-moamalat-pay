@@ -1,9 +1,7 @@
 includes:
     - vendor/larastan/larastan/extension.neon
 
-
 parameters:
-
     paths:
         - src
 
@@ -11,8 +9,19 @@ parameters:
     level: 5
 
     ignoreErrors:
-    #    - '#Unsafe usage of new static#'
+        # Ignore "env outside of the config directory" errors
+        -
+            message: "#Called 'env' outside of the config directory.*#"
+            paths:
+                - src/config/moamalat-pay.php
 
-    #excludePaths:
-    #    - ./*/*/FileToBeExcluded.php
+        # Ignore "view-string" type errors
+        -
+            message: '#Parameter \#1 \$view of function view expects view-string\|null, string given.*#'
+            paths:
+                - src/Pay.php
+                - src/View/Components/Pay.php
 
+    # Uncomment to exclude specific files
+    # excludePaths:
+    #     - ./*/*/FileToBeExcluded.php
