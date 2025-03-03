@@ -44,11 +44,7 @@ class Refund
     {
         $this->terminal_id = config('moamalat-pay.terminal_id');
         $this->merchant_id = config('moamalat-pay.merchant_id');
-        if (config('moamalat-pay.key_hex')) {
-            $this->key = hex2bin(config('moamalat-pay.key'));
-        } else {
-            $this->key = pack('H*', config('moamalat-pay.key'));
-        }
+        $this->key = hex2bin(config('moamalat-pay.key'));
     }
 
     /**

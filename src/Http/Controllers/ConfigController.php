@@ -21,11 +21,7 @@ class ConfigController extends BaseController
         $MerchantId = config('moamalat-pay.merchant_id');
         $amount = $request->amount;
         $merchantReference = $request->merchantReference;
-        if (config('moamalat-pay.key_hex')) {
-            $key = hex2bin(config('moamalat-pay.key'));
-        } else {
-            $key = pack('H*', config('moamalat-pay.key'));
-        }
+        $key = hex2bin(config('moamalat-pay.key'));
         $DateTimeLocalTrxn = time();
         $encode_data = "Amount={$amount}&DateTimeLocalTrxn={$DateTimeLocalTrxn}&MerchantId={$MerchantId}&MerchantReference={$merchantReference}&TerminalId={$TerminalId}";
 

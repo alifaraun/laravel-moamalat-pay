@@ -19,9 +19,6 @@ return [
     // Secure key
     'key' => env('MOAMALATPAY_KEY'),
 
-    // Is key hex
-    'key_hex' => env('MOAMALATPAY_KEY_HEX', true),
-
     /*
     |--------------------------------------------------------------------------
     | Production

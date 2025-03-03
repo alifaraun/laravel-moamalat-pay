@@ -11,7 +11,7 @@ class RefundTest extends TestCase
 {
     protected $transaction;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // additional setup
@@ -39,7 +39,7 @@ class RefundTest extends TestCase
 
         // set fake requests to make testing faster
         Http::fake([
-            //'https://tnpg.moamalat.net/cube/paylink.svc/api/FilterTransactions' => Http::response($respone, 200),
+            // 'https://tnpg.moamalat.net/cube/paylink.svc/api/FilterTransactions' => Http::response($respone, 200),
             'https://tnpg.moamalat.net/cube/paylink.svc/api/RefundTransaction' => function ($r) use ($respone) {
                 if ($r->offsetGet('MerchantId') == 'testing_authentication_failed') { // response for testing authentication failed
                     return Http::response([
@@ -133,7 +133,7 @@ class RefundTest extends TestCase
     /**
      * Test
      */
-    public function test_get_refNumber()
+    public function test_get_ref_number()
     {
         $this->loadTransaction();
         $this->assertEquals('1233674', $this->transaction->getRefNumber());
@@ -146,8 +146,8 @@ class RefundTest extends TestCase
     {
         $this->loadTransaction();
         $this->assertEquals('Approved', $this->transaction->get('Message'));
-        //$this->expectExceptionMessage('Undefined index: CardNotFound');
-        //$this->assertEquals('Approved', $this->transaction->get('CardNotFound'));
+        // $this->expectExceptionMessage('Undefined index: CardNotFound');
+        // $this->assertEquals('Approved', $this->transaction->get('CardNotFound'));
     }
 
     /**

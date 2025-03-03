@@ -11,7 +11,7 @@ class GetTransactionTest extends TestCase
 {
     protected $transaction;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         // additional setup
@@ -74,7 +74,7 @@ class GetTransactionTest extends TestCase
 
         // set fake requests to make testing faster
         Http::fake([
-            //'https://tnpg.moamalat.net/cube/paylink.svc/api/FilterTransactions' => Http::response($respone, 200),
+            // 'https://tnpg.moamalat.net/cube/paylink.svc/api/FilterTransactions' => Http::response($respone, 200),
             'https://tnpg.moamalat.net/cube/paylink.svc/api/FilterTransactions' => function ($r) use ($respone) {
                 if ($r->offsetGet('MerchantId') == 'testing_authentication_failed') { // response for testing authentication failed
                     return Http::response([
@@ -126,8 +126,8 @@ class GetTransactionTest extends TestCase
     public function test_get_property()
     {
         $this->assertEquals('639499XXXXXX2740', $this->transaction->get('CardNo'));
-        //$this->expectExceptionMessage('Undefined index: CardNotFound');
-        //$this->assertEquals('639499XXXXXX2740', $this->transaction->get('CardNotFound'));
+        // $this->expectExceptionMessage('Undefined index: CardNotFound');
+        // $this->assertEquals('639499XXXXXX2740', $this->transaction->get('CardNotFound'));
     }
 
     /**
