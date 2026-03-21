@@ -50,6 +50,7 @@ composer require alifaraun/laravel-moamalat-pay
 
 | Laravel | Package | install command                                          |
 | :------ | :------ | :------------------------------------------------------- |
+| 13.x.x  | 7.x     | `composer require alifaraun/laravel-moamalat-pay "^7.0"` |
 | 12.x.x  | 6.x     | `composer require alifaraun/laravel-moamalat-pay "^6.0"` |
 | 11.x.x  | 5.x     | `composer require alifaraun/laravel-moamalat-pay "^5.0"` |
 | 10.x.x  | 4.x     | `composer require alifaraun/laravel-moamalat-pay "^4.0"` |

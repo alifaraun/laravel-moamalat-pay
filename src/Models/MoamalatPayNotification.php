@@ -2,7 +2,9 @@
 
 namespace MoamalatPay\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use MoamalatPay\Factories\MoamalatPayNotificationFactory;
 
 /**
  * Class MoamalatPayNotification
@@ -30,6 +32,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MoamalatPayNotification extends Model
 {
+    use HasFactory;
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
+     */
+    protected static function newFactory(): MoamalatPayNotificationFactory
+    {
+        return MoamalatPayNotificationFactory::new();
+    }
     public $fillable = [
         'MerchantId',
         'TerminalId',

@@ -3,12 +3,14 @@
   "type": "library",
   "description": "Easy - Moamalat Lightbox integration for Laravel.",
   "require": {
-    "laravel/framework": "^12.0"
+    "php": "^8.3",
+    "laravel/framework": "^13.0"
   },
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "MoamalatPay\\": "src/"
+      "MoamalatPay\\": "src/",
+      "MoamalatPay\\Factories\\": "src/database/factories/"
     }
   },
   "autoload-dev": {
@@ -37,13 +39,13 @@
       "email": "ali1996426@hotmail.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "require-dev": {
-    "guzzlehttp/guzzle": "7.9.2",
+    "guzzlehttp/guzzle": "^7.8",
     "nunomaduro/collision": "^8.0",
-    "laravel/legacy-factories": "1.x-dev",
-    "laravel/pint": "dev-main",
-    "larastan/larastan": "3.x-dev",
-    "orchestra/testbench": "10.x-dev"
+    "laravel/pint": "^1.0",
+    "larastan/larastan": "^3.0",
+    "orchestra/testbench": "^11.0"
   }
 }
