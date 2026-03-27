@@ -3,12 +3,13 @@
 namespace MoamalatPay\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use MoamalatPay\Events\DisallowedRequestEvent;
 
 /**
  * Validate sender ip is allowed to send notifications.
  *
- * @param  \Illuminate\Http\Request  $request
+ * @param  Request  $request
  * @return string|null
  */
 class AllowedIps

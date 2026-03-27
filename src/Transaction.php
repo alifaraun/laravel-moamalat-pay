@@ -3,6 +3,7 @@
 namespace MoamalatPay;
 
 use Exception;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class Transaction
@@ -10,7 +11,7 @@ class Transaction
     /**
      * Response
      *
-     * @var \Illuminate\Http\Client\Response
+     * @var Response
      */
     private $response;
 
@@ -101,7 +102,7 @@ class Transaction
     /**
      * Get all properties of reponse
      *
-     * @return \Illuminate\Http\Client\Response
+     * @return Response
      */
     public function getResponse()
     {

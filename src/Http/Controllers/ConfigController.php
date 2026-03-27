@@ -2,6 +2,7 @@
 
 namespace MoamalatPay\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller as BaseController;
 use MoamalatPay\Http\Requests\GenerateSecureKeyRequest;
 
@@ -13,7 +14,7 @@ class ConfigController extends BaseController
     /**
      * Genearte SecureHash for use in payment transaction
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function generateSecureKey(GenerateSecureKeyRequest $request)
     {

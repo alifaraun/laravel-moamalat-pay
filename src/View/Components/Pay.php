@@ -3,6 +3,7 @@
 namespace MoamalatPay\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class Pay extends Component
 {
@@ -36,7 +37,7 @@ class Pay extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\View\View|\Closure|string
+     * @return View|\Closure|string
      */
     public function render()
     {

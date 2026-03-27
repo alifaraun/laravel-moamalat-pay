@@ -2,14 +2,16 @@
 
 namespace MoamalatPay\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use MoamalatPay\Factories\MoamalatPayNotificationFactory;
 
 /**
  * Class MoamalatPayNotification
- *
- * @version Sep 17, 2022, 5:12 pm UTC
  *
  * @property int $id
  * @property string $MerchantId
@@ -26,10 +28,31 @@ use MoamalatPay\Factories\MoamalatPayNotificationFactory;
  * @property string $PayerAccount
  * @property string $PayerName
  * @property string $ActionCode
- * @property string $request
+ * @property array $request
  * @property bool $verified
- * @property string $ip
+ * @property string|null $ip
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  */
+#[Fillable([
+    'MerchantId',
+    'TerminalId',
+    'DateTimeLocalTrxn',
+    'TxnType',
+    'Message',
+    'PaidThrough',
+    'SystemReference',
+    'NetworkReference',
+    'MerchantReference',
+    'Amount',
+    'Currency',
+    'PayerAccount',
+    'PayerName',
+    'ActionCode',
+    'request',
+    'verified',
+    'ip',
+])]
 class MoamalatPayNotification extends Model
 {
     use HasFactory;
@@ -42,26 +65,6 @@ class MoamalatPayNotification extends Model
         return MoamalatPayNotificationFactory::new();
     }
 
-    public $fillable = [
-        'MerchantId',
-        'TerminalId',
-        'DateTimeLocalTrxn',
-        'TxnType',
-        'Message',
-        'PaidThrough',
-        'SystemReference',
-        'NetworkReference',
-        'MerchantReference',
-        'Amount',
-        'Currency',
-        'PayerAccount',
-        'PayerName',
-        'ActionCode',
-        'request',
-        'verified',
-        'ip',
-    ];
-
     /**
      * Get the attributes that should be cast.
      *
@@ -70,64 +73,42 @@ class MoamalatPayNotification extends Model
     protected function casts(): array
     {
         return [
-            'MerchantId' => 'string',
-            'TerminalId' => 'string',
-            'DateTimeLocalTrxn' => 'string',
-            'TxnType' => 'string',
-            'Message' => 'string',
-            'PaidThrough' => 'string',
-            'SystemReference' => 'string',
-            'NetworkReference' => 'string',
-            'MerchantReference' => 'string',
-            'Amount' => 'string',
-            'Currency' => 'string',
-            'PayerAccount' => 'string',
-            'PayerName' => 'string',
-            'ActionCode' => 'string',
-            'request' => 'string',
+            'request' => 'array',
             'verified' => 'boolean',
         ];
     }
 
     /**
      * Get the table associated with the model.
-     *
-     * @return string
      */
-    public function getTable()
+    public function getTable(): string
     {
         return config('moamalat-pay.notification.table', parent::getTable());
     }
 
     /**
      * Scope a query to only include approved transactions.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return void
      */
-    public function scopeApproved($query)
+    #[Scope]
+    protected function approved(Builder $query): void
     {
         $query->where('ActionCode', '00');
     }
 
     /**
      * Scope a query to only include verified transactions.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return void
      */
-    public function scopeVerified($query)
+    #[Scope]
+    protected function verified(Builder $query): void
     {
         $query->where('verified', 1);
     }
 
     /**
-     * Scope a query to only include transactions with current credentials terminal_id and mercahnt_id.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return void
+     * Scope a query to only include transactions with current credentials terminal_id and merchant_id.
      */
-    public function scopeCurrentCredential($query)
+    #[Scope]
+    protected function currentCredential(Builder $query): void
     {
         $query
             ->where('MerchantId', config('moamalat-pay.merchant_id'))
