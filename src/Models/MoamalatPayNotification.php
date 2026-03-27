@@ -36,13 +36,12 @@ class MoamalatPayNotification extends Model
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
      */
     protected static function newFactory(): MoamalatPayNotificationFactory
     {
         return MoamalatPayNotificationFactory::new();
     }
+
     public $fillable = [
         'MerchantId',
         'TerminalId',
