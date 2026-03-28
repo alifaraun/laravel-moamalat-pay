@@ -11,6 +11,6 @@ class Pay
 
     public function pay(string|int|float $amount, string $reference = ''): string
     {
-        return "<script> _moamalatPay.pay($amount, '$reference'); </script>";
+        return '<script> _moamalatPay.pay(' . json_encode($amount) . ', ' . json_encode($reference) . '); </script>';
     }
 }
