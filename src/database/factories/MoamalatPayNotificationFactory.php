@@ -40,7 +40,7 @@ class MoamalatPayNotificationFactory extends Factory
         ];
 
         return $data + [
-            'request' => json_encode($data),
+            'request' => $data,
             'verified' => $this->faker->boolean(),
             'ip' => $this->faker->ipv4(),
         ];

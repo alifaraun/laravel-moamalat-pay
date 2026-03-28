@@ -12,7 +12,7 @@ use MoamalatPay\Http\Requests\GenerateSecureKeyRequest;
 class ConfigController extends BaseController
 {
     /**
-     * Genearte SecureHash for use in payment transaction
+     * Generate SecureHash for use in payment transaction
      *
      * @return JsonResponse
      */
