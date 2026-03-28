@@ -10,7 +10,7 @@ class Transaction
     /**
      * Response
      *
-     * @var \Illuminate\Http\Client\Response
+     * @var array
      */
     private $response;
 
@@ -101,7 +101,7 @@ class Transaction
     /**
      * Get all properties of reponse
      *
-     * @return \Illuminate\Http\Client\Response
+     * @return array
      */
     public function getResponse()
     {
